@@ -10,22 +10,22 @@
   <script>
   function getConfigUrl(val) {
     const arrLocationHostname = [
-      "test-mall-admin.dadaorg.com",
+      "test-mall-admin.com",
       "localhost",
-      "staging-mall-admin.dadaorg.com",
-      "mall-admin.dadaabc.com"
+      "staging-mall-admin.com",
+      "mall-admin.com"
     ];
   const hostName = arrLocationHostname[val];
   console.log(arrLocationHostname[val]);
   
   if (hostName.indexOf("test") !== -1 || hostName.indexOf("localhost") !== -1) {
-    return "https://test2-admin2.dadaabc.us/api/";
+    return "https://test2-admin2.us/api/";
   }
   if (hostName.indexOf("staging") !== -1) {
-    return "https://staging-admin2.dadaabc.com/api/";
+    return "https://staging-admin2.com/api/";
   }
   if (hostName.indexOf("admin") !== -1) {
-    return "https://admin.dadaabc.com:10013/api/";
+    return "https://admin.com:10013/api/";
   }
 }
 
