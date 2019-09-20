@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>测试config 配置文件</title>
+</head>
+<body>
+  <script>
+  function getConfigUrl(val) {
+    const arrLocationHostname = [
+      "test-mall-admin.dadaorg.com",
+      "localhost",
+      "staging-mall-admin.dadaorg.com",
+      "mall-admin.dadaabc.com"
+    ];
+  const hostName = arrLocationHostname[val];
+  console.log(arrLocationHostname[val]);
+  
+  if (hostName.indexOf("test") !== -1 || hostName.indexOf("localhost") !== -1) {
+    return "https://test2-admin2.dadaabc.us/api/";
+  }
+  if (hostName.indexOf("staging") !== -1) {
+    return "https://staging-admin2.dadaabc.com/api/";
+  }
+  if (hostName.indexOf("admin") !== -1) {
+    return "https://admin.dadaabc.com:10013/api/";
+  }
+}
+
+
+console.log("return ->>getConfig-->0", getConfigUrl(0));
+console.log("return ->>getConfig-->1", getConfigUrl(1));
+console.log("return ->>getConfig-->2", getConfigUrl(2));
+console.log("return ->>getConfig-->3", getConfigUrl(3));
+  
+  </script>
+  
+</body>
+</html>

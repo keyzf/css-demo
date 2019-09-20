@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>数组对象合并</title>
+  </head>
+  <body>
+    <script>
+      var arr = [
+        { id: 11, name: "first" },
+        { id: 22, name: "name" },
+        { id: 33, name: "age" },
+        { id: 44, name: "bb" },
+        { id: 5555, name: "aa" },
+        { id: 66666, name: "name", flag: true },
+        { id: 7777, name: "aa", flag: true },
+        { id: 8888, name: "name", flag: false },
+        { id: 99999, name: "aa" },
+        { id: 0000, name: "name", age: 1 },
+        { id: 11111, name: "name" }
+      ];
+
+      function mergeArr(arr) {
+        var result = [];
+        arr.forEach(item => {
+          const isFindObj = result.filter(obj => obj.name === item.name);
+          if (isFindObj.length === 0) {
+            result.push(item);
+          } else {
+            result.forEach((res, index) => {
+              if (res.name === item.name) {
+                result.splice(index, 1, { ...res, ...item });
+              }
+            });
+          }
+        });
+        return result;
+      }
+
+      console.log(mergeArr(arr));
+    </script>
+  </body>
+</html>

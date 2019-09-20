@@ -1,0 +1,166 @@
+@color:#000;
+@nice-blue: #5B83AD;
+@light-blue: @nice-blue + #111;
+
+#header {
+  color: @light-blue;
+}
+
+.container{
+  background: @color;
+}
+
+.bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+
+#menu a {
+  color: #111;
+  .bordered;
+}
+
+.post a {
+  color: red;
+  .bordered;
+}
+
+
+.mixin (@a) when (lightness(@a) >= 50%) {
+  background-color: black;
+}
+.mixin (@a) when (lightness(@a) < 50%) {
+  background-color: white;
+}
+.mixin (@a) {
+  color: @a;
+}
+.class1 { .mixin(#ddd) }
+.class2 { .mixin(#555) }
+
+@base: #f04615;
+@width: 0.5;
+.class {
+  width: percentage(@width); // returns `50%`
+  color: saturate(@base, 5%);
+  background-color: spin(lighten(@base, 25%), 8);
+}
+
+
+// Variables
+@my-selector: banner;
+
+// Usage
+.@{my-selector} {
+  font-weight: bold;
+  line-height: 40px;
+  margin: 0 auto;
+}
+
+
+// Variables
+@images: "../img";
+
+// Usage
+body {
+  color: #444;
+  background: url("@{images}/white-sand.png");
+}
+
+@property: color;
+.widget {
+  @{property}: #0ee;
+  background-@{property}: #999;
+}
+
+@fnord:  "I am fnord.";
+@var:    "fnord";
+.content{
+  content: @@var;
+}
+
+
+.bucket {
+  color: blue;
+  height: percentage(1);
+}
+.selector:extend(.bucket) {
+  width: 100px;
+};
+
+
+.animal {
+  background-color: black;
+  color: white;
+}
+.bear {
+  &:extend(.animal);
+  background-color: brown;
+}
+
+
+.a, #b {
+  color: red;
+}
+.mixin-class1 {
+  .a;
+}
+.mixin-id1 {
+  #b;
+}
+
+.mixin(@color: black; @margin: 10px; @padding: 20px) {
+  color: @color;
+  margin: @margin;
+  padding: @padding;
+}
+.class1 {
+  .mixin(@margin: 20px; @color: #33acfe);
+}
+.class2 {
+  .mixin(#efca44; @padding: 40px);
+}
+
+
+.generate-columns(4);
+
+.generate-columns(@n, @i: 1) when (@i =< @n) {
+  .column-@{i} {
+    width: (@i * 100% / @n);
+  }
+  .generate-columns(@n, (@i + 1));
+}
+
+.loop(@counter) when (@counter > 0) {
+  .loop((@counter - 1));    // next iteration
+  width: (10px * @counter); // code for each iteration
+}
+
+div {
+  .loop(5); // launch the loop
+}
+
+
+
+//media  css
+// 变量
+@mediawidth: 213px, 320px, 360px, 375px, 384px, 400px, 414px, 424px, 432, 480px, 540px, 600px, 640px,
+  720px, 768px, 800px, 854px, 960px, 966px, 1024px, 1080px, 1280px, 1440px, 1536px, 1920px, 2560px;
+// mixin
+.generate-media-query(@size, @i: 1) when (@i =< length(@size)) {
+  html {
+    @media screen and (min-width: extract(@size, @i)) {
+      // root element size
+      font-size: extract(@size, @i) * 100px / 375px;
+    }
+  }
+  .generate-media-query(@size, (@i + 1));
+}
+
+
+.generate-media-query(@mediawidth);
+
+
+
+
+

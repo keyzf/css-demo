@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Js绘制生成花瓣效果</title>
+    <style>
+    body{
+        background: #000;
+    }
+    .outer{
+        width: 600px;
+        height:600px;
+        border-radius: 50%;
+        background: transparent;
+        
+        animation: remote 15s linear infinite;
+    }
+    .img-container{
+        margin:100px auto 0px;
+        /* animation: scale 8s linear infinite;      */
+        transform: scale(4.5)
+    }
+    .dot{
+        width: 6px;
+        height: 6px;
+        position: absolute;
+        border-radius: 50%;
+    }
+    /* .red-bg{
+        background:linear-gradient( rgb(221, 105, 10), rgb(221, 105, 10))
+    } */
+    .blue-bg{
+        background:linear-gradient(rgb(128, 105, 0), rgb(221, 105, 10))
+    }
+    .yellow-bg{
+        background:linear-gradient( rgb(128, 115, 0),rgb(202, 199, 13) )
+    }
+    .perse-bg{
+        background:radial-gradient( rgb(224, 228, 9), rgb(178, 224, 10))
+    }
+    @keyframes remote {
+        0% {
+            transform: rotate(0deg)
+        }
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+
+    @keyframes scale {
+        0% {
+            transform: scale(1)
+        }
+        25%{
+            transform: scale(1.5)
+        }
+        50% {
+            transform: scale(2)
+        }
+        75%{
+            transform: scale(1.5)
+        }
+        100% {
+            transform: scale(1)
+        }
+    }
+    </style>
+
+</head>
+
+<body>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+
+    <script>
+        let outerDiv = document.getElementsByClassName('outer')[0]
+        let innerDiv = document.getElementsByClassName('inner')[0]
+        
+        function dragImage(radius, backgroundColor, offset, marginTop){
+            var imageContainer = document.createElement('div');
+            for (t = 1; t <= 360; t++) {
+                lo = radius * Math.sin(2 * (Math.PI / 180) * t);
+                x = lo * Math.cos((Math.PI / 180) * t);
+                y = lo * Math.sin((Math.PI / 180) * t);
+                var img = document.createElement('div');
+                img.classList.add('img-container','dot',backgroundColor)
+              
+                img.style.left = x + 300 + 'px'
+                img.style.top = y + 200 + 'px'
+                // img.style.backgroundColor = backgroundColor
+                imageContainer.appendChild(img)
+
+                lo = radius * Math.cos(2 * (Math.PI / 180) * t);
+                x = lo * Math.cos((Math.PI / 180) * t);
+                y = lo * Math.sin((Math.PI / 180) * t);
+                var img = document.createElement('div')
+                img.classList.add('img-container','dot',backgroundColor)
+              
+                img.style.left = x + 300 + 'px'
+                img.style.top = y + 200 + 'px'
+                // img.style.backgroundColor = backgroundColor
+                imageContainer.appendChild(img);
+
+                imageContainer.style.transform = 'rotate(' + offset+ 'deg)';
+                imageContainer.classList.add('outer')
+                imageContainer.style.marginTop = marginTop
+                
+                outerDiv.appendChild(imageContainer);
+            } 
+        }
+        dragImage(150,'blue-bg',30,'0');
+        // dragImage(150,'red-bg',60,'-600px');
+        dragImage(100,'yellow-bg',90,'-600px');
+        dragImage(50,'perse-bg',110,'-600px');
+    </script>
+</body>
+
+</html>

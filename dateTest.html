@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Date Test</title>
+</head>
+<body>
+  <script>
+
+  function format(data){
+    const dateTime =new Date(data)
+    const [year, month, day, date] = [
+      dateTime.getFullYear(),
+      dateTime.getMonth(),
+      dateTime.getDate(),
+      dateTime.getDay()
+      ];
+   
+      const payTimeArr = [
+        {
+          min: new Date(year,month,day).getTime() / 1000,
+          max: new Date(year,month,day+1).getTime() / 1000-1 
+        }, // 今天
+        {
+            min: new Date(year,month,day-1).getTime() / 1000,
+            max: new Date(year,month,day).getTime() / 1000 - 1 
+        }, // 昨天
+        { 
+          min: new Date(year,month,day-date).getTime() / 1000,
+          max: new Date(year,month,day-date+7).getTime() / 1000-1 
+        }, // 本周
+        { 
+          min: new Date(year,month,day-date-7).getTime() / 1000,
+          max: new Date(year,month,day-date).getTime() / 1000-1 
+         }, // 上周
+        {
+          min: new Date(year,month,1).getTime() / 1000,
+          max: new Date(year,month,day+1).getTime() / 1000 -1
+        }, // 本月
+        {
+          min: new Date(year,month - 1,1).getTime() / 1000,
+          max: new Date( year,month,1).getTime() / 1000 -1
+        } // 上月
+        
+      ];
+      console.log(payTimeArr);
+      
+      return payTimeArr
+  }
+  format("2019-1-1");
+  
+  </script>
+</body>
+</html>

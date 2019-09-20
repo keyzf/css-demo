@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./drag.css">
+</head>
+
+<body>
+
+  <div class="source-container" data-source="container" draggable="true" ondragstart="dragStartFunc(event)">
+    <div class="picture-container">
+      <img src="./images/1.png" alt="" class="item item-1" data-picture="1">
+    </div>
+    <div class="picture-container">
+      <img src="./images/2.png" alt="" class="item item-2" data-picture="2">
+    </div>
+    <div class="picture-container">
+      <img src="./images/3.png" alt="" class="item item-3" data-picture="3">
+    </div>
+    <div class="picture-container">
+      <img src="./images/4.png" alt="" class="item item-4" data-picture="4">
+    </div>
+    <div class="picture-container">
+      <img src="./images/5.png" alt="" class="item item-5" data-picture="5">
+    </div>
+    <div class="picture-container">
+      <img src="./images/6.png" alt="" class="item item-6" data-picture="6">
+    </div>
+    <div class="picture-container">
+      <img src="./images/7.png" alt="" class="item item-7" data-picture="7">
+    </div>
+    <div class="picture-container">
+      <img src="./images/8.png" alt="" class="item item-8" data-picture="8">
+    </div>
+    <div class="picture-container">
+      <img src="./images/9.png" alt="" class="item item-9" data-picture="9">
+    </div>
+    <div class="picture-container">
+      <img src="./images/10.png" alt="" class="item item-10" data-picture="10">
+    </div>
+    <div class="picture-container">
+      <img src="./images/11.png" alt="" class="item item-11" data-picture="11">
+    </div>
+    <div class="picture-container">
+      <img src="./images/12.png" alt="" class="item item-12" data-picture="12">
+    </div>
+    <div class="picture-container">
+      <img src="./images/13.png" alt="" class="item item-13" data-picture="13">
+    </div>
+    <div class="picture-container">
+      <img src="./images/14.png" alt="" class="item item-14" data-picture="14">
+    </div>
+    <div class="picture-container">
+      <img src="./images/15.png" alt="" class="item item-15" data-picture="15">
+    </div>
+    <div class="picture-container">
+      <img src="./images/16.png" alt="" class="item item-16" data-picture="16">
+    </div>
+
+  </div>
+
+  <div class="drop-container" ondragover="dragOverFunc(event)" ondrop="dropFunc(event)">
+    <div class="item-container pic-1" data-drop="1"></div>
+    <div class="item-container pic-2" data-drop="2"></div>
+    <div class="item-container pic-3" data-drop="3"></div>
+    <div class="item-container pic-4" data-drop="4"></div>
+    <div class="item-container pic-5" data-drop="5"></div>
+    <div class="item-container pic-6" data-drop="6"></div>
+    <div class="item-container pic-7" data-drop="7"></div>
+    <div class="item-container pic-8" data-drop="8"></div>
+    <div class="item-container pic-9" data-drop="9"></div>
+    <div class="item-container pic-10" data-drop="10"></div>
+    <div class="item-container pic-11" data-drop="11"></div>
+    <div class="item-container pic-12" data-drop="12"></div>
+    <div class="item-container pic-13" data-drop="13"></div>
+    <div class="item-container pic-14" data-drop="14"></div>
+    <div class="item-container pic-15" data-drop="15"></div>
+    <div class="item-container pic-16" data-drop="16"></div>
+  </div>
+
+
+  <script src="./drag.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>关于线性渐变的介绍 （linear-gradient）</title>
+    <style>
+      body {
+        max-width: 1000px;
+        background: linear-gradient(
+            217deg,
+            rgba(255, 0, 0, 0.8),
+            rgba(255, 0, 0, 0) 70.71%
+          ),
+          linear-gradient(
+            127deg,
+            rgba(0, 255, 0, 0.8),
+            rgba(0, 255, 0, 0) 70.71%
+          ),
+          linear-gradient(
+            336deg,
+            rgba(0, 0, 255, 0.8),
+            rgba(0, 0, 255, 0) 70.71%
+          );
+      }
+      p {
+        text-indent: 2em;
+      }
+
+      .content-column__left {
+        width: 400px;
+        float: left;
+      }
+      .content-column__right::after {
+        /* overflow: hidden; */
+        display: block;
+        content: "";
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      CSS linear-gradient()
+      函数用于创建一个表示两种或多种颜色线性渐变的图片。其结果属于
+      &lt;gradient&gt; 数据类型，是一种特别的 &lt;image&gt; 数据类型。
+    </p>
+
+    <div>
+      <pre>
+      /* 渐变轴为45度，从蓝色渐变到红色 */
+      linear-gradient(45deg, blue, red);
+
+      /* 从右下到左上、从蓝色渐变到红色 */
+      linear-gradient(to left top, blue, red);
+
+      /* 从下到上，从蓝色开始渐变、到高度40%位置是绿色渐变开始、最后以红色结束 */
+      linear-gradient(0deg, blue, green 40%, red);
+      </pre>
+    </div>
+
+    <p>
+      如同其他gradient函数一般， linear-gradient() 函数没有内在尺寸；即
+      它不具备固有的或首选的尺寸，也不具备首选的比率。
+      该函数的具体尺寸将与其使用的元素尺寸匹配
+    </p>
+
+    <p>
+      提示： 由于gradient 数据类型系的子数据类型，gradient 只能被用于 image
+      可以使用的地方。 因此， linear-gradient()
+      并不适用background-color以及类似的使用的 color 的数据类型的属性中。
+    </p>
+
+    <p>
+      线性渐变有一个轴（梯度线）定义，
+      其上的每个点具有两种或多种的颜色，且轴上的每个点都具有独立的颜色。为了构建出平滑的渐变，
+      linear-gradient() 函数构建一系列垂直于渐变先的着色线，
+      每一条着色线的颜色则取决于与之垂直相交的渐变线上的色点
+    </p>
+
+    <div class="content-column">
+      <div class="content-column__left">
+        <img
+          src="./linear-gradient.png"
+          alt=""
+          srcset=""
+          vspace="10"
+          hspace="10"
+        />
+      </div>
+      <div class="content-column__right">
+        <p>
+          渐变线由包含渐变图形的容器的中心点和一个角度来定义的。
+          渐变线上的颜色值是由不同的点来定义的，包含起始点，终点，以及两者之间的可选的中间点（中间点可以有多个）
+        </p>
+
+        <p>
+          起始点是渐变线上代表起始颜色值的点。起始点由渐变线和过容器顶带你的垂直线之间的交叉点来定义。
+          （垂直线跟渐变线在同一象限内）
+        </p>
+
+        <p>
+          同样的， 终点是渐变线上代表最终颜色值的点。
+          终点也是由渐变线和从最近的顶点发出的垂直线之间的交叉点定义的，然而从起始点的对称点来定义终点是更容易理解的一种方式，因为终点是起点关于容器的中心点的反射点。
+        </p>
+
+        <p>
+          关于起点和终点的稍微有些复杂的定义导致了一个有趣的性质，有时候被叫做不可思议的顶点效应；
+          起点附近的点具有跟起点相同的颜色值，
+          终点附近的点具有跟终点相同的颜色值。
+        </p>
+      </div>
+    </div>
+    <p>
+      不仅仅只有起点和终点的颜色值可以指定。 通过提供额外的颜色中间点，web
+      开发者可以构建在起始颜色值和终点颜色值之间的自定义更强的过渡效果，另外还可以提供多种颜色值的渐变线。
+    </p>
+
+    <p>
+      当颜色中间蒂娜的位置被隐式定义，它被放置在位于它之前的点和位于它之后的点之间的中间位置处。利用
+      &lt;length&gt; 或者 &lt;percentage&gt; 数据类型可以显示定义一个位置。
+    </p>
+  </body>
+</html>

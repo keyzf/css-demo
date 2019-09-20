@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.nav-ul {
+  list-style: none;
+}
+.nav-ul__li {
+  display: inline-block;
+  box-sizing: border-box;
+  width: calc(11.33333333%);
+  text-align: center;
+}
+.body-left,
+.body-right {
+  display: inline-block;
+  vertical-align: top;
+}
+.body-left {
+  width: 120px;
+}
+.body-right {
+  margin-left: 15px;
+  width: 75%;
+  height: 800px;
+}
+.footer-ul {
+  list-style: none;
+}
+.footer-ul__li {
+  display: inline-block;
+  box-sizing: border-box;
+  width: calc(16.66666667%);
+  text-align: center;
+}

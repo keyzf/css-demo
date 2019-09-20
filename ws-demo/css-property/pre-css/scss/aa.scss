@@ -1,0 +1,125 @@
+// variables
+$color:#000;
+$nice-blue: #5B83AD;
+$light-blue: $nice-blue + #111;
+
+#header {
+  color: $light-blue;
+}
+
+.container{
+  background: $color;
+}
+
+.bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+
+
+// extend
+#menu a {
+  color: #111;
+  @extend .bordered;
+}
+
+.post a {
+  color: red;
+  @extend .bordered;
+}
+
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+
+.animal {
+  background-color: black;
+  color: white;
+}
+.bear {
+  @extend .animal;
+  background-color: brown;
+}
+
+
+// mixins  if
+@mixin adjust-location($x, $y) {
+  @if unitless($x) {
+    @warn "Assuming #{$x} to be in pixels";
+    $x: 1px * $x;
+  }
+  @if unitless($y) {
+    @warn "Assuming #{$y} to be in pixels";
+    $y: 1px * $y;
+  }
+  position: relative; left: $x; top: $y;
+}
+
+.view{
+  @include adjust-location(1,2)
+}
+
+
+// for  The @for directive repeatedly outputs a set of styles. For each repetition, a counter variable is used to adjust the output. The directive has two forms: @for $var from <start> through <end> and @for $var from <start> to <end>. Note the difference in the keywords through and to. $var can be any variable name, like $i; <start> and <end> are SassScript expressions that should return integers. When <start> is greater than <end> the counter will decrement instead of increment.
+@for $i from 1 through 3 {
+  .item-#{$i} { width: 2em * $i; }
+}
+
+$type: monster;
+p {
+  @if $type == ocean {
+    color: blue;
+  } @else if $type == matador {
+    color: red;
+  } @else if $type == monster {
+    color: green;
+  } @else {
+    color: black;
+  }
+}
+
+// each The @each directive usually has the form @each $var in <list or map>. $var can be any variable name, like $length or $name, and <list or map> is a SassScript expression that returns a list or a map.
+$str: aa-1, bb-2, cc-3, dd;
+@each $animal in $str {
+  .#{$animal}-icon {
+    background-image: url('/images/#{$animal}.png');
+  }
+}
+
+// This ruleset won't be rendered on its own.
+#context a%extreme {
+  color: blue;
+  font-weight: bold;
+  font-size: 2em;
+}
+.notice {
+  @extend %extreme;
+}
+
+// while   The @while directive takes a SassScript expression and repeatedly outputs the nested styles until the statement evaluates to false. This can be used to achieve more complex looping than the @for statement is capable of, although this is rarely necessary. For example:
+$i: 6;
+@while $i > 0 {
+  .item-#{$i} { width: 2em * $i; }
+  $i: $i - 2;
+}
+
+@mixin colors($text, $bgColor, $border) {
+  color: $text;
+  background-color: $bgColor;
+  border-color: $border;
+}
+
+$values: #ff0000, #00ff00, #0000ff;
+.primary {
+  @include colors($values...);
+}
+
+$value-map: (border: #ff0000, bgColor: #0000ff, text: #00ff00, );
+.secondary {
+  @include colors($value-map...);
+}

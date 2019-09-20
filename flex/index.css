@@ -1,0 +1,37 @@
+.container {
+  width: 800px;
+  height: 600px;
+  display: flex;
+  border: 1px solid #000;
+}
+.container .left {
+  display: flex;
+  flex-basis: 400px;
+  flex-direction: column;
+}
+.container .right {
+  display: flex;
+  flex-basis: 400px;
+  flex-direction: column;
+}
+.container .item {
+  height: 200px;
+}
+.container .item-1 {
+  background: red;
+}
+.container .item-2 {
+  background: blue;
+}
+.container .item-3 {
+  background: green;
+}
+.container .item-4 {
+  background: purple;
+}
+.container .title {
+  font-size: 20px;
+}
+.container .aside {
+  color: #fff;
+}

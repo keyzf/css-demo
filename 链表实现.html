@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>链表实现</title>
+  </head>
+  <body>
+    <script>
+      //Node 类包含两个属性：element 用来保存节点上的数据，next 用来保存指向下一个节点的
+      //链接。我们使用一个构造函数来创建节点，该构造函数设置了这两个属性的值
+      function Node(element) {
+        this.element = element;
+        this.next = null;
+        this.previous = null; //双向链表 ,,  指向上一个值
+      }
+      function LList() {
+        this.head = new Node("head");
+        // this.head.next = this.head; //循环链表改变一下head指向
+      }
+
+      //find() 方法演示了如何在链表上进行移动。首先，创建一个新节点，并将链表的头节点赋
+      //给这个新创建的节点。然后在链表上进行循环，如果当前节点的element 属性和我们要找
+      //的信息不符，就从当前节点移动到下一个节点。如果查找成功，该方法返回包含该数据的
+      //节点；否则，返回null
+
+      //在一个已知节点后面插入元素时，先要找到“后面”的节点。为此，创建一个辅助方法
+      //find()，该方法遍历链表，查找给定数据。如果找到数据，该方法就返回保存该数据的节
+      //点。find() 方法的实现代码如下
+      LList.prototype.find = function(item) {
+        var currNode = this.head;
+        while (currNode.element != item) {
+          currNode = currNode.next;
+        }
+        return currNode;
+      };
+
+      // insert，该方法向链表中插入一个节点。向链表中插入新节点
+      // 时，需要明确指出要在哪个节点前面或后面插入。首先介绍如何在一个已知节点后面插入
+      // 元素。
+      LList.prototype.insert = function(newElement, item) {
+        var newNode = new Node(newElement);
+        var current = this.find(item);
+
+        console.log("current", current);
+        console.log("newNode", newNode);
+
+        newNode.next = current.next;
+        current.next = newNode;
+
+        newNode.previous = current; //双向链表
+
+        console.log("current,,next", current);
+        console.log("newNode,,next", newNode);
+      };
+
+      // insert，该方法向链表中插入一个节点。向链表中插入新节点
+      // 时，需要明确指出要在哪个节点前面或后面插入。首先介绍如何在一个已知节点后面插入
+      // 元素。
+      LList.prototype.insertBefore = function(newElement, item) {
+        var newNode = new Node(newElement);
+        var current = this.findPrevious(item);
+
+        newNode.next = current.next;
+        current.next = newNode;
+        newNode.previous = current; //双向链表
+      };
+
+      // display() 方法，该方法用来显示链表中的元素：
+
+      // // 单链表  display 方法
+      // LList.prototype.display = function() {
+      //   var currNode = this.head;
+      //   while (!(currNode.next == null)) {
+      //     print(currNode.next.element);
+      //     currNode = currNode.next;
+      //   }
+      // };
+
+      // 循环链表  display 方法
+      LList.prototype.display = function() {
+        var currNode = this.head;
+        while (!(currNode.next == null) && !(currNode.next.element == "head")) {
+          console.log(currNode.next.element);
+          currNode = currNode.next;
+        }
+      };
+
+      // 为了完成以反序显示链表中元素这类任务，需要给双向链表增加一个工具方法，用来查找
+      //最后的节点。findLast() 方法找出了链表中的最后一个节点，同时免除了从前往后遍历链
+      //表之苦
+      LList.prototype.findLast = function findLast() {
+        var currNode = this.head;
+        while (!(currNode.next == null)) {
+          currNode = currNode.next;
+        }
+        return currNode;
+      };
+
+      //有了这个工具方法，就可以写一个方法，反序显示双向链表中的元素。dispReverse() 方
+      //法如下所示：
+      LList.prototype.dispReverse = function() {
+        var currNode = this.head;
+        currNode = this.findLast();
+        while (!(currNode.previous == null)) {
+          console.log("反向展示", currNode.element);
+          currNode = currNode.previous;
+        }
+      };
+
+      LList.prototype.findPrevious = function(item) {
+        var currNode = this.head;
+        while (!(currNode.next == null) && currNode.next.element != item) {
+          currNode = currNode.next;
+        }
+        return currNode;
+      };
+
+      // LList.prototype.remove = function(item) {
+      //   var prevNode = this.findPrevious(item);
+      //   if (!(prevNode.next == null)) {
+      //     prevNode.next = prevNode.next.next;
+      //   }
+      // };
+      // 双向链表的remove 方法
+      LList.prototype.remove = function(item) {
+        var currNode = this.find(item);
+        if (!(currNode.next == null)) {
+          currNode.previous.next = currNode.next;
+          currNode.next.previous = currNode.previous;
+          currNode.next = null;
+          currNode.previous = null;
+        }
+      };
+
+      // 主程序
+      var cities = new LList();
+      cities.insert("Conway", "head");
+      cities.insert("Russellville", "Conway");
+      cities.insert("Carlisle", "Russellville");
+      cities.insert("Alma", "Carlisle");
+      // cities.display();
+      cities.remove("Carlisle");
+      // cities.display();
+
+      console.log("cities", cities);
+    </script>
+  </body>
+</html>

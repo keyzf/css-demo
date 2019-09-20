@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>排序算法</title>
+  </head>
+  <body>
+    <script>
+      // 基数排序
+      // 先对个位数排序  再对十位数排序  ...
+      function baseSort(array) {
+        if (!Array.isArray(array)) return;
+        let numLeng = 0;
+        const total = Math.max(...array).toString().length;
+        console.log("total,,,", total);
+
+        while (numLeng < total) {
+          const temp = [[], [], [], [], [], [], [], [], [], []];
+          array.forEach(item => {
+            temp[((item / Math.pow(10, numLeng)) >> 0) % 10].push(item);
+          });
+          array = temp.flat();
+          numLeng++;
+          console.log("arr", array);
+        }
+
+        return array;
+      }
+
+      var resolve = [21, 34, 17, 25, 31, 23, 44, 36, 4, 7, 111, 32, 45];
+
+      console.log("resolve", baseSort(resolve)); //[4, 7, 17, 21, 23, 25, 31, 32, 34, 36, 44, 45, 111]
+    </script>
+  </body>
+</html>

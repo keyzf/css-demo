@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Object属性 proxy方法</title>
+</head>
+<body>
+  <script>
+    // The Object.defineProperties() method defines new or modifies existing properties directly on an object ,returning the object
+    const object1 = {}
+    Object.defineProperties(object1, {
+      property1: {
+        value: 42,
+        writable: true, 
+      },
+      property2: {
+        value: "我是唯一，改变不了",
+        writable: false,
+    
+      },
+     
+    });
+
+
+    const object2 = {}
+    Object.defineProperty(object2, "name", {
+      enumerable: true,
+      configurable: true,    
+      get: function(){
+        console.log('set function: %s', this.name);        
+        return this.name
+      },
+      set: function(value){
+        console.log('get function: %s', value);
+        this.name = value
+      } 
+    })
+
+
+    var bValue = 38;
+    const o = {};
+    Object.defineProperty(o, 'b', {
+      // Using shorthand method names (ES2015 feature).
+      // This is equivalent to:
+      // get: function() { return bValue; },
+      // set: function(newValue) { bValue = newValue; },
+      get() { 
+        console.log('set function: %s', bValue);
+        return bValue;
+      },
+      set(newValue) { 
+        console.log('get function: %s', bValue);
+        bValue = newValue; 
+      },
+      enumerable: true,
+      configurable: true
+    });
+
+
+    var objOrigin = {name:"this name",age: 16}
+    var obj = new Proxy(objOrigin, {
+      enumerable: true,
+      configurable: true,
+      get: function (target, key, receiver) {
+        console.log(`getting ${key}!`);
+        return Reflect.get(target, key, receiver);
+      },
+      set: function (target, key, value, receiver) {
+        console.log(`setting ${key}!`);
+        return Reflect.set(target, key, value, receiver);
+      }
+    });
+
+    
+
+    function proxyGetFunc(value){
+      console.log("proxyGetFunc",value);
+      return value;     
+    }
+
+
+    console.log("defineProperties---->", object1);
+    
+  
+  
+  </script>
+</body>
+</html>

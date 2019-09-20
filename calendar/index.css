@@ -1,0 +1,79 @@
+.calendar-container {
+  width: 600px;
+  margin: 10px auto 0;
+  padding: 10px;
+  border: 1px solid #aaa;
+}
+.calendar-container .calendar-title {
+  display: flex;
+  padding: 0 10px 10px;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+.calendar-container .calendar-title__right-up,
+.calendar-container .calendar-title__right-down {
+  display: inline-block;
+  width: 40px;
+  cursor: pointer;
+  background: #eee;
+  text-align: center;
+}
+.calendar-container .calendar-title__right-up {
+  margin-right: 10px;
+}
+.calendar-container .calendar-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+}
+.calendar-container .calendar-header__item:first-child,
+.calendar-container .calendar-header__item:last-child {
+  color: rgba(228, 101, 101, 0.5);
+}
+.calendar-container .calendar-content__table {
+  border: 1px solid #aaa;
+  width: 100%;
+  text-align: center;
+  table-layout: fixed;
+}
+.calendar-container .calendar-content__table-tr:nth-child(odd) {
+  background: rgba(240, 240, 240, 0.5);
+}
+.calendar-container .calendar-content__table-td {
+  border: 1px solid #aaa;
+  height: 60px;
+  color: rgba(49, 36, 238, 0.5);
+}
+.calendar-container .calendar-content__table-td__now {
+  background: rgba(47, 187, 152, 0.5);
+}
+.calendar-container .calendar-content__table-td__gray {
+  background: rgba(188, 190, 189, 0.5);
+  color: #eee;
+}
+.calendar-container .calendar-content__table-td__num {
+  font-size: 18px;
+  color: rgba(7, 7, 12, 0.5);
+  padding-left: 10px;
+}
+.calendar-container .calendar-content__table-td__str {
+  font-size: 12px;
+  color: rgba(49, 36, 238, 0.5);
+}
+.calendar-container .calendar-content__table-td__str-gray {
+  font-size: 13px;
+  color: rgba(181, 10, 233, 0.5);
+}
+.calendar-container .calendar-content__table-td__holiday {
+  font-size: 12px;
+  color: rgba(24, 145, 78, 0.5);
+}
+.calendar-container .calendar-content__table-td__week {
+  background: rgba(228, 101, 101, 0.5);
+}
+.calendar-container .calendar-content__table-td:hover {
+  background: rgba(176, 222, 240, 0.5);
+  color: #000;
+}

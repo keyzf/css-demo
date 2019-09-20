@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>对象观察模式</title>
+  </head>
+  <body>
+    <script>
+      // 存放观察行为的函数集合
+      var queuedObservers = new Set();
+      var observe = fn => queuedObservers.add(fn);
+
+      // 需要观察的对象，
+      var observable = obj => new Proxy(obj, { set, get });
+      function set(target, key, value, receiver) {
+        var result = Reflect.set(target, key, value, receiver);
+        queuedObservers.forEach(observer => observer(key, value));
+        return result;
+      }
+
+      function get(target, key, receiver) {
+        var result = Reflect.get(target, key, receiver);
+        queuedObservers.forEach(observer => observer(key, target[key]));
+        return result;
+      }
+
+      var obj = { name: "test", age: 12 };
+
+      var obObj = observable(obj);
+      observe((k, v) => {
+        console.log("key: %s, value: %s", k, v);
+      });
+
+      obObj.name = "aa";
+    </script>
+  </body>
+</html>

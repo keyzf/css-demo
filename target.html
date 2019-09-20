@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div{
+      padding:20px;
+    }
+  #a{
+    background:red;
+  }
+  #b{
+    background:yellow;
+  }
+  #c{
+    background:blue;
+  }
+  #d{
+    background:green;
+  }
+  </style>
+</head>
+<body>
+  <div id="a">
+    <div id="b">
+        <div id="c">
+            <div id="d">aaa</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('a').addEventListener('click', function ( e ) {
+        console.log('a--target:' + e.target.id + '¤tTarget:' + e.currentTarget.id);
+    });
+    document.getElementById('b').addEventListener('click', function ( e ) {
+        console.log('b---target:' + e.target.id + '¤tTarget:' + e.currentTarget.id);
+        e.stopPropagation()
+    },false);
+    document.getElementById('c').addEventListener('click', function ( e ) {
+        console.log('c--target:' + e.target.id + '¤tTarget:' + e.currentTarget.id);
+    });
+    document.getElementById('d').addEventListener('click', function ( e ) {
+        console.log('d---target:' + e.target.id + '¤tTarget:' + e.currentTarget.id);
+    });
+</script>
+</body>
+</html>

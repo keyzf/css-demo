@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>鼠标跟随效果</title>
+  <style>
+    .mouse-container{
+      background: #000;
+      width: 800px;
+      margin:20px auto;
+    }
+    table > tr > td {
+      color:transparent;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #000;   
+    }
+    .border{
+      border: 1px solid #fff;
+      background: #333;
+    }
+    .border-gray-top{
+      border: 1px solid #aaa;
+      border-top: 1px solid #000;
+      background: #222;
+    }
+    .border-gray-bottom{
+      border: 1px solid #aaa;
+      border-bottom: 1px solid #000;
+      background: #222;
+    }
+    .border-gray-left{
+      border: 1px solid #aaa;
+      border-left: 1px solid #000;
+      background: #222;
+    }
+    .border-gray-right{
+      border: 1px solid #aaa;
+      border-right: 1px solid #000;
+      background: #222;
+    }
+    .border-top-left{
+      border-top: 1px solid #666;
+      border-left: 1px solid #666;
+    }
+    .border-top-right{   
+      border-top: 1px solid #666;
+      border-right: 1px solid #666;
+    }
+    .border-bottom-left{
+      border-bottom: 1px solid #666;
+      border-left: 1px solid #666;
+    }
+    .border-bottom-right{
+      border-bottom: 1px solid #666;
+      border-right: 1px solid #666;
+    }
+    
+  </style>
+</head>
+<body>
+<div class="mouse-container"></div>
+
+  <script>
+    const container = document.getElementsByClassName("mouse-container")[0];
+    const table = document.createElement("table");
+        
+    for (let i = 0; i < 20; i++) {
+      const tr = document.createElement("tr");
+      for (let j = 0; j < 20; j++) {
+        const td = document.createElement("td");
+        td.classList.add(`${i}-${j}`);
+        td.innerHTML = `${i}-${j}`;
+        tr.appendChild(td);
+        td.addEventListener("mouseleave",(e)=>{
+          if(e.target.nodeName.toLowerCase()==="td"){
+            e.target.classList.remove("border");
+            const [xAxis,yAxis] = e.target.innerHTML.split("-");
+            if(xAxis-1>=0){
+              const topTarget = document.getElementsByClassName(`${xAxis-1}-${yAxis}`)[0];
+              topTarget.classList.remove("border-gray-top");
+            }
+            if(xAxis*1<19){
+              const bottomTarget = document.getElementsByClassName(`${xAxis*1+1}-${yAxis}`)[0];
+              bottomTarget.classList.remove("border-gray-bottom");
+            }
+            if(yAxis-1>=0){
+              const leftTarget = document.getElementsByClassName(`${xAxis}-${yAxis-1}`)[0];
+              leftTarget.classList.remove("border-gray-left");
+            }
+            if(yAxis*1<19){
+              const rightTarget = document.getElementsByClassName(`${xAxis}-${yAxis*1+1}`)[0];
+              rightTarget.classList.remove("border-gray-right");
+            }
+            if(xAxis-1>=0 && yAxis-1>=0){
+              const topLeftTarget = document.getElementsByClassName(`${xAxis-1}-${yAxis-1}`)[0];
+              topLeftTarget.classList.remove("border-bottom-right");
+            }
+            if(xAxis*1<19 && yAxis-1>=0){
+              const topLeftTarget = document.getElementsByClassName(`${xAxis*1+1}-${yAxis-1}`)[0];
+              topLeftTarget.classList.remove("border-top-right");
+            }
+            if(xAxis-1>=0 && yAxis*1<19){
+              const topLeftTarget = document.getElementsByClassName(`${xAxis-1}-${yAxis*1+1}`)[0];
+              topLeftTarget.classList.remove("border-bottom-left");
+            }
+            if(xAxis*1<19 && yAxis*1<19){
+              const bottomRightTarget = document.getElementsByClassName(`${xAxis*1+1}-${yAxis*1+1}`)[0];
+              bottomRightTarget.classList.remove("border-top-left");
+            }
+          }     
+        })
+      }
+      table.appendChild(tr);
+    }
+    container.appendChild(table);
+    table.addEventListener("mousemove",(e)=>{
+      if(e.target.nodeName.toLowerCase()==="td"){
+        e.target.classList.add("border");
+        const [xAxis,yAxis] = e.target.innerHTML.split("-");
+        if(xAxis-1>=0){
+          const topTarget = document.getElementsByClassName(`${xAxis-1}-${yAxis}`)[0];
+          topTarget.classList.add("border-gray-top");
+        }
+        if(xAxis*1<19){
+          const bottomTarget = document.getElementsByClassName(`${xAxis*1+1}-${yAxis}`)[0];
+          bottomTarget.classList.add("border-gray-bottom");
+        }
+        if(yAxis-1>=0){
+          const leftTarget = document.getElementsByClassName(`${xAxis}-${yAxis-1}`)[0];
+          leftTarget.classList.add("border-gray-left");
+        }
+        if(yAxis*1<19){
+          const rightTarget = document.getElementsByClassName(`${xAxis}-${yAxis*1+1}`)[0];
+          rightTarget.classList.add("border-gray-right");
+        }
+        if(xAxis-1>=0 && yAxis-1>=0){
+          const topLeftTarget = document.getElementsByClassName(`${xAxis-1}-${yAxis-1}`)[0];
+          topLeftTarget.classList.add("border-bottom-right");
+        }
+        if(xAxis*1<19 && yAxis-1>=0){
+          const topLeftTarget = document.getElementsByClassName(`${xAxis*1+1}-${yAxis-1}`)[0];
+          topLeftTarget.classList.add("border-top-right");
+        }
+        if(xAxis-1>=0 && yAxis*1<19){
+          const topLeftTarget = document.getElementsByClassName(`${xAxis-1}-${yAxis*1+1}`)[0];
+          topLeftTarget.classList.add("border-bottom-left");
+        }
+        if(xAxis*1<19 && yAxis*1<19){
+          const bottomRightTarget = document.getElementsByClassName(`${xAxis*1+1}-${yAxis*1+1}`)[0];
+          bottomRightTarget.classList.add("border-top-left");
+        }
+      }     
+    });
+    // container.innerHTML = "看看我在哪儿"
+  </script>
+</body>
+</html>

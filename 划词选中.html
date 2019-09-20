@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .selected{
+      background: rgb(133, 34, 34);
+    }
+  </style>
+</head>
+<body>
+
+  <div onclick="setSelectedRange()" class="container">
+    <span>获取<span class="selected">鼠标</span>选中<span class="selected">文字的</span>的</span><br />
+    <span>获取鼠标选中文字的的</span><br />
+    <span>获取鼠标选中文字的的</span><br />
+    <span>获取鼠标选中文字的的</span><br />
+    <span>获取鼠标选中文字的的</span><br />
+    <span>获取鼠标选中文字的的</span>
+  </div>
+  
+
+
+  <script>
+   function setSelectedRange(e) {
+     var el =  document.body.querySelectorAll('.container')[0]
+      let start;
+      let end;
+      if (window.getSelection) {
+        const range = window.getSelection().getRangeAt(0);
+        console.log('range',range);
+        const preSelectionRange = range.cloneRange();
+        console.log('preSelectionRange 1 ',preSelectionRange);
+        preSelectionRange.selectNodeContents(el);
+        console.log('preSelectionRange 2 ',preSelectionRange);
+        preSelectionRange.setEnd(range.startContainer, range.startOffset);
+        console.log('preSelectionRange 3 ',preSelectionRange);
+
+        console.log('preSelectionRange 4 ',preSelectionRange.toString());
+        start = preSelectionRange.toString().replace(/\s/gm,'').length;
+
+        console.log('preSelectionRange 5 ',start);
+        end = start + range.toString().length;
+        console.log('preSelectionRange 6 ',end);
+      } else if (document.selection && document.selection.type !== 'Control') {
+        const selectedTextRange = document.selection.createRange();
+        const preSelectionTextRange = document.body.createTextRange();
+        preSelectionTextRange.moveToElementText(el);
+        preSelectionTextRange.setEndPoint('EndToStart', selectedTextRange);
+        start = preSelectionTextRange.text.length;
+        end = start + selectedTextRange.text.length;
+      }
+
+      console.log('setSelectedRange - [获取鼠标选中文字的 index] :', start, end);
+    }
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>自定义loading 页面</title>
+  <style> 
+  body{
+    margin: 0;
+    background: #e2e2e2;
+    /* height: 100%;   */
+  }
+    .container {
+      display: inline-block;
+      
+      width: 100%;
+      height: 100vh;
+      transform: translate(50%,50%);    
+      
+      /* text-align: center; */
+    }
+
+    @keyframes donut-spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .donut {
+      display: inline-block;
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left-color: #7983ff;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+      animation: donut-spin 1.2s linear infinite;
+    }
+
+
+    /* 特效文字 */
+    .hover-underline-animation {
+      display: inline-block;
+      position: relative;
+      color: #0087ca;
+    }
+    .hover-underline-animation::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #0087ca;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+    .hover-underline-animation:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    /* button */
+    .mouse-cursor-gradient-tracking {
+      position: relative;
+      background: #7983ff;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      border: none;
+      color: white;
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+    }
+    .mouse-cursor-gradient-tracking span {
+      position: relative;
+    }
+    .mouse-cursor-gradient-tracking::before {
+      --size: 0;
+      content: '';
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--size);
+      height: var(--size);
+      background: radial-gradient(circle closest-side, pink, transparent);
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease;
+    }
+    .mouse-cursor-gradient-tracking:hover::before {
+      --size: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="donut"></div>
+  </div>
+  <p class="hover-underline-animation">Hover this text to see the effect!</p>
+  <p>
+    <button class="mouse-cursor-gradient-tracking"><span>Hover me</span></button>
+  </p>
+  
+</body>
+<script>
+  var btn = document.querySelector('.mouse-cursor-gradient-tracking')
+  btn.onmousemove = function(e) {
+    var x = e.pageX - btn.offsetLeft - btn.offsetParent.offsetLeft
+    var y = e.pageY - btn.offsetTop - btn.offsetParent.offsetTop
+    btn.style.setProperty('--x', x + 'px')
+    btn.style.setProperty('--y', y + 'px')
+  }
+</script>
+</html>

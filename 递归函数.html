@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>递归函数</title>
+</head>
+<body>
+  <script>
+  var arr = [{"id":2,"parent_id":1,"children":[{"id":21,"parent_id":2,"children":[{"id":24,"parent_id":21,"children":[]},{"id":25,"parent_id":21,"children":[]},{"id":161,"parent_id":21,"children":[]},{"id":53,"parent_id":21,"children":[]}]},{"id":171,"parent_id":2,"children":[]},{"id":54,"parent_id":2,"children":[{"id":26,"parent_id":54,"children":[]},{"id":49,"parent_id":54,"children":[]},{"id":61,"parent_id":54,"children":[]},{"id":62,"parent_id":54,"children":[]},{"id":115,"parent_id":54,"children":[]}]},{"id":27,"parent_id":2,"children":[{"id":166,"parent_id":27,"children":[]},{"id":167,"parent_id":27,"children":[]},{"id":168,"parent_id":27,"children":[]},{"id":169,"parent_id":27,"children":[]},{"id":170,"parent_id":27,"children":[]}]},{"id":55,"parent_id":2,"children":[]},{"id":179,"parent_id":2,"children":[{"id":180,"parent_id":179,"children":[]}]}]}];
+
+  console.log("origin",arr);
+
+  function formatFunc (arr){
+    arr.map(item=>{
+      if(item.children.length>0){
+         formatFunc(item.children)
+      }else{
+        delete item.children  
+      }
+          
+    });
+    return arr
+  }
+
+  const temp = formatFunc(arr)
+  console.log("temp",temp);
+  
+  
+  
+  </script>
+  
+</body>
+</html>

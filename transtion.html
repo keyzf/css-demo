@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body{
+      height: 3000px;
+      width: 100%;
+    }
+  .block{
+    position: fixed;
+    bottom:0;
+    width: 1px;
+    height: 2px;
+    background: linear-gradient(#00f,#000);
+    transition:width 3s;
+  }
+  .width{
+    width:100%;
+  }
+  </style>
+</head>
+<body>
+  <div class="block">aa</div>
+  <script>
+    window.addEventListener('scroll',()=>{
+      console.log("document");
+      document.querySelectorAll('.block')[0].classList.add("width")
+    })
+    
+  </script>
+</body>
+</html>

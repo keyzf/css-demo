@@ -1,0 +1,66 @@
+.demo-1 {
+  counter-reset: num;
+  font-size: 20px;
+  line-height: 2;
+}
+
+div div {
+  padding-left: 15px;
+}
+
+.demo-1__item:nth-child(odd) {
+  color: rgb(63, 39, 201);
+  background: rgb(39, 169, 201);
+}
+
+.demo-1__item:nth-child(even) {
+  color: rgb(39, 169, 201);
+  background: rgb(63, 39, 201);
+}
+
+.demo-1__item::before {
+  counter-increment: num;
+  content: counter(num) ". ";
+}
+
+.demo-2 {
+  counter-reset: num;
+  font-size: 20px;
+  line-height: 2;
+  background: rgb(39, 169, 201);
+  color: #fff;
+  margin-top: 10px;
+}
+
+.demo-2__item::before {
+  counter-increment: num 2;
+  content: counter(num) ". ";
+}
+
+.demo-3 {
+  counter-reset: num 3;
+  font-size: 20px;
+  line-height: 2;
+  background: rgb(63, 39, 201);
+  color: #fff;
+  margin-top: 10px;
+}
+
+.demo-3__item::before {
+  counter-increment: num 2;
+  content: counter(num) ". ";
+}
+
+.demo-4 {
+  counter-reset: num;
+  font-size: 20px;
+  line-height: 2;
+  background: rgb(39, 169, 201);
+  color: #fff;
+  margin-top: 10px;
+}
+
+.demo-4__item::before {
+  counter-increment: num;
+  content: counter(num, georgian) ". ";
+}

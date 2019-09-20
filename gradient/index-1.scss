@@ -1,0 +1,28 @@
+$red: #f66;
+$blue: #09f;
+$green: #3c9;
+$orange: #e8eb66;
+$purple: #af5cdf;
+
+.pie-chart {
+  border-radius: 100%;
+  width: 300px;
+  height: 300px;
+  background-image: conic-gradient(
+    $red 0 25%,
+    $purple 25% 30%,
+    $orange 30% 55%,
+    $blue 55% 70%,
+    $green 70% 100%
+  );
+}
+
+
+.square-bg {
+	width: 500px;
+	height: 300px;
+	background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%),
+		linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
+	background-position: 0 0, 20px 20px;
+	background-size: 40px 40px;
+}

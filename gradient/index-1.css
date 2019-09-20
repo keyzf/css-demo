@@ -1,0 +1,14 @@
+.pie-chart {
+  border-radius: 100%;
+  width: 300px;
+  height: 300px;
+  background-image: conic-gradient(#f66 0 25%, #af5cdf 25% 30%, #e8eb66 30% 55%, #09f 55% 70%, #3c9 70% 100%);
+}
+
+.square-bg {
+  width: 500px;
+  height: 300px;
+  background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
+  background-position: 0 0, 20px 20px;
+  background-size: 40px 40px;
+}

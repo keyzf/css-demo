@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>利用伪元素生成可定制的目录索引</title>
+    <link rel="stylesheet" href="./counter-index.css" />
+  </head>
+  <body>
+    <ul class="list-style">
+      <li>
+        第一部分
+        <ul>
+          <li>
+            第一节 11
+            <ul>
+              <li>aa</li>
+              <li>bb</li>
+            </ul>
+          </li>
+          第二节 22
+          <li></li>
+        </ul>
+      </li>
+      <li>
+        第二部分
+        <ul>
+          <li>第一节 11</li>
+          <li>第二节 22</li>
+        </ul>
+      </li>
+      <li>
+        第三部分
+        <ul>
+          <li>第一节 11</li>
+          <li>
+            第二节 22
+            <ul>
+              <li>aa</li>
+              <li>bb</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ol>
+      <li>item</li>
+      <!-- 1     -->
+      <li>
+        item
+        <!-- 2     -->
+        <ol>
+          <li>item</li>
+          <!-- 2.1   -->
+          <li>item</li>
+          <!-- 2.2   -->
+          <li>
+            item
+            <!-- 2.3   -->
+            <ol>
+              <li>item</li>
+              <!-- 2.3.1 -->
+              <li>item</li>
+              <!-- 2.3.2 -->
+            </ol>
+            <ol>
+              <li>item</li>
+              <!-- 2.3.1 -->
+              <li>item</li>
+              <!-- 2.3.2 -->
+              <li>item</li>
+              <!-- 2.3.3 -->
+            </ol>
+          </li>
+          <li>item</li>
+          <!-- 2.4   -->
+        </ol>
+      </li>
+      <li>item</li>
+      <!-- 3     -->
+      <li>item</li>
+      <!-- 4     -->
+    </ol>
+
+    <div class="first">
+      第一章 啊啊啊
+      <div class="second">
+        第一节 啊啊啊
+        <div class="third">啊啊啊</div>
+        <div class="third">啊啊啊</div>
+      </div>
+      <div class="second">
+        第二节
+        <div class="third">啊啊啊</div>
+        <div class="third">啊啊啊</div>
+      </div>
+    </div>
+    <div class="first">
+      第二章
+      <div class="second">
+        第一节
+        <div class="third">啊啊啊</div>
+        <div class="third">啊啊啊</div>
+      </div>
+      <div class="second">
+        第二节
+        <div class="third">啊啊啊</div>
+        <div class="third">啊啊啊</div>
+      </div>
+    </div>
+    <div class="first">
+      第三章
+      <div class="second">
+        第一节
+        <div class="third">啊啊啊</div>
+        <div class="third">啊啊啊</div>
+      </div>
+      <div class="second">
+        第二节
+        <div class="third">啊啊啊</div>
+        <div class="third">啊啊啊</div>
+      </div>
+    </div>
+  </body>
+</html>

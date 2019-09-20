@@ -1,0 +1,27 @@
+.container {
+  white-space: nowrap;
+}
+.container .item {
+  width: 100%;
+  height: 300px;
+  display: inline-block;
+  transition: transform 1s ease-out;
+}
+.container .item:nth-child(even) {
+  background: #808080;
+}
+.container .item:nth-child(odd) {
+  background: #080808;
+}
+.container .negetive {
+  transform: translateX(100%);
+}
+.container .negetive1 {
+  transform: translateX(200%);
+}
+.container .positive {
+  transform: translateX(-100%);
+}
+.container .positive1 {
+  transform: translateX(-200%);
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+      // 节流函数  
+      function Animation(fps) {
+        this.fps = fps;
+        var fpsInterval = 1000 / this.fps;
+        var last = new Date().getTime(); //上次执行的时刻
+        var i = 0;
+        var rAf = null;
+
+        function animate() {
+          rAf = requestAnimationFrame(animate);
+          // 执行时的时间
+          var now = new Date().getTime();
+          var elapsed = now - last;
+          // 经过了足够的时间
+          if (elapsed > fpsInterval) {
+            last = now - (elapsed % fpsInterval); //校正当前时间
+
+            console.log("start----,", i++, last);
+          }
+        }
+        this.start = animate;
+        this.stop = function() {
+          cancelAnimationFrame(rAf);
+          i = 0;
+        };
+      }
+    </script>
+  </body>
+</html>

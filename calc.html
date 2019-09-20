@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  const obj = {link1:"aa",link2:"bb",link3:"cc",link4:"dd",type2:1,type3:3,type4:4};
+  const tempArr = [];
+  const arr = Object.keys(obj)
+  let leng = 0;
+  arr.map(item=>{
+    if(item.slice(-1)*1>leng){
+      leng=item.slice(-1)*1
+    }
+  })
+  for(let i =1;i<=leng;i++){
+    const obj1key = arr.filter(obj=>obj.slice(-1)*1===i);
+    const obj1 = {};
+    obj1key.map(item=>{
+      obj1[item]=obj[item];
+      });
+    tempArr.push(obj1)
+  }
+  console.log("tempArr",tempArr);
+
+  
+  </script>
+</body>
+</html>

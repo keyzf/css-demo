@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>svg===========================================================================================================</p>
+    <svg width="100" height="100">
+      <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+    </svg>
+
+    <svg width="400" height="100">
+      <rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
+    </svg>
+
+    <svg width="400" height="180">
+      <rect x="50" y="20" rx="20" ry="20" width="150" height="150" 
+      style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
+    </svg>
+
+    <svg width="300" height="200">
+      <polygon points="100,10 40,198 190,78 10,78 160,198"
+        style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+    </svg>
+
+    <svg height="130" width="500">
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <ellipse cx="100" cy="70" rx="85" ry="55" fill="url(#grad1)" />
+      <text fill="#ffffff" font-size="45" font-family="Verdana" x="50" y="86">SVG</text>
+        Sorry, your browser does not support inline SVG.
+    </svg>
+    <p>canvas =====================================================================================================start</p>
+    <canvas id="ctx1"></canvas>
+    <canvas id="ctx2"></canvas>
+    <canvas id="ctx3"></canvas>
+    <canvas id="ctx4"></canvas>
+    <canvas id="ctx5"></canvas>
+
+    <p>Raphael demonstration ===========================================================================================</p>
+    <div id="container"></div> 
+
+    <script>
+      // ctx1
+      var c1 = document.getElementById("ctx1");
+      var ctx1 = c1.getContext("2d");
+      ctx1.beginPath();
+      ctx1.arc(95, 50, 40, 0, 2 * Math.PI);
+      ctx1.stroke();
+
+      // ctx2
+      var c2 = document.getElementById("ctx2");
+      var ctx2 = c2.getContext("2d");
+      ctx2.font = "30px Arial";
+      ctx2.fillText("Hello World", 10, 50);
+
+      // ctx3
+      var c3 = document.getElementById("ctx3");
+      var ctx3 = c3.getContext("2d");
+      ctx3.font = "30px Arial";
+      ctx3.strokeText("Hello World", 10, 50);
+
+      // ctx4
+      var c4 = document.getElementById("ctx4");
+      var ctx4 = c4.getContext("2d");
+
+      // Create gradient
+      var grd1 = ctx4.createLinearGradient(0, 0, 200, 0);
+      grd1.addColorStop(0, "red");
+      grd1.addColorStop(1, "white");
+
+      // Fill with gradient
+      ctx4.fillStyle = grd1;
+      ctx4.fillRect(10, 10, 150, 80);
+
+      //  ctx5
+      var c5 = document.getElementById("ctx5");
+      var ctx5 = c5.getContext("2d");
+
+      // Create gradient
+      var grd2 = ctx5.createRadialGradient(75, 50, 5, 90, 60, 100);
+      grd2.addColorStop(0, "red");
+      grd2.addColorStop(1, "white");
+
+      // Fill with gradient
+      ctx5.fillStyle = grd2;
+      ctx5.fillRect(10, 10, 150, 80);
+
+    </script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script> 
+    <script> 
+      window.onload = function() {
+        var paper = new Raphael("container", 500, 300);
+        for(var i = 0; i < 5; i+=1) {
+          var multiplier = i*5;
+          paper.circle(250 + (2*multiplier), 150 + multiplier, 50 - multiplier) 
+        }
+      }
+    </script>
+  
+</body>
+</html>

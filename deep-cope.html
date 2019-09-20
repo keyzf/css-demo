@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DeepCopy</title>
+</head>
+<body>
+  <script>
+    /**
+     * function deepCopy  深度copy一个对象包括属性值为复杂类型数据[object,array]
+     * @params {object} p
+     */
+    function deepCopy(p, c = {}) {
+　　　　for (let i in p) {
+　　　　　　if (typeof p[i] === 'object') {
+　　　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
+　　　　　　　　deepCopy(p[i], c[i]);
+　　　　　　} else {
+　　　　　　　　　c[i] = p[i];
+　　　　　　}
+　　　　}
+　　　　return c;
+　　}
+  
+  </script>
+</body>
+</html>

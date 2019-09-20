@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Services Worker 入门学习</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <div class="content">
+    <h2>service worker 通常遵循以下基本步骤来使用service worker：</h2>
+    <p>1. service workder URL 通过serviceWorkerContainer.register()来获取和注册</p>
+    <p>2. 如果注册成功，service worker 就在ServiceWorkerGlobalScope 环境中运行；这是一个特殊类型的worker上下文运行环境，与主运行线程（执行脚本）相独立，同时也没有访问dom的能力</p>
+    <p>3. service workder 现在可以处理事件了</p>
+    <P>4. 受 service worker 控制的页面打开后会尝试去安装 service worker。 最先发送给service worker的事件是安装事件（在这个事件里可以开始进行填充 indexDB 和缓存站点资源）。 这个流程同原生APP 或者 Firefox OS APP 是一样的 让所有资源可离线访问</P>
+    <P>5. 当oninstall 事件的处理程序执行完毕后，可以认为service worker  安装完成了</P>
+    <P>6. 下一步是激活。 当service worker 安装完成后， 会接受到一个激活事件（ activate event ）。onactivate 主要用途是清理先前版本的service worker 脚本中使用的资源</P>
+    <P>7. service worker 现在可以控制页面了， 当仅是在register() 成功后的打开的页面。也就是说， 页面起始于有没有service worker ， 且在页面的接下来生命周期内维持这个状态。 所以， 页面不得不重新加载以让service worker 获得完全的控制</P>
+  </div>
+
+  <div>
+    <h2>Promise</h2>
+    <p>promise 是一种非常适用于异步操作的机制， 一个操作依赖于另一个操作的成功执行。 这是service worker 的核心工作的机制</p>
+    <p>promises 可以做很多事情。 但现在， 你只需要知道， 如果有什么返回了一个promise， 你可以在后面.then() 来传入成功的失败的回调函数。 或者， 你可以在后面加上 .catch 如果你想添加一个操作失败的回调函数</p>
+    <p></p>
+  </div>
+  <script src="./service.js"></script>
+  <script src="./index.js"></script>
+</body>
+</html>

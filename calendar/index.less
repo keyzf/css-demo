@@ -1,0 +1,85 @@
+.calendar-container {
+  width: 600px;
+  margin: 10px auto 0;
+  padding: 10px;
+  border: 1px solid #aaa;
+  .calendar-title {
+    display: flex;
+    padding: 0 10px 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    &__right {
+      &-up,
+      &-down {
+        display: inline-block;
+        width: 40px;
+        cursor: pointer;
+        background: #eee;
+        text-align: center;
+      }
+      &-up {
+        margin-right: 10px;
+      }
+    }
+  }
+  .calendar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    &__item:first-child,
+    &__item:last-child {
+      color: rgba(228, 101, 101, 0.5);
+    }
+  }
+
+  .calendar-content {
+    &__table {
+      border: 1px solid #aaa;
+      width: 100%;
+      text-align: center;
+      table-layout: fixed; //阻止td自动撑开
+      // border-collapse:collapse;
+      &-tr:nth-child(odd) {
+        background: rgba(240, 240, 240, 0.5);
+      }
+      &-td {
+        border: 1px solid #aaa;
+        height: 60px;
+        color: rgba(49, 36, 238, 0.5);
+        &__now {
+          background: rgba(47, 187, 152, 0.5);
+        }
+        &__gray {
+          background: rgba(188, 190, 189, 0.5);
+          color: #eee;
+        }
+        &__num {
+          font-size: 18px;
+          color: rgba(7, 7, 12, 0.5);
+          padding-left: 10px;
+        }
+        &__str {
+          font-size: 12px;
+          color: rgba(49, 36, 238, 0.5);
+          &-gray{
+            font-size: 13px;
+            color:rgba(181, 10, 233, 0.5);
+          }
+        }
+        &__holiday{
+          font-size: 12px;
+          color:rgba(24, 145, 78, 0.5);
+        }
+        &__week{
+          background: rgba(228, 101, 101, 0.5);
+        }
+      }
+      &-td:hover {
+        background: rgba(176, 222, 240, 0.5);
+        color: #000;
+      }
+    }
+  }
+}
