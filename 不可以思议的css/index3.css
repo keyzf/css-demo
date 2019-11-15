@@ -1,0 +1,15 @@
+button {
+  outline: none;
+  border: none;
+  color: white;
+  padding: 0.3em 1em;
+  border-radius: 0.2em;
+  cursor: pointer;
+  background: linear-gradient(#3de5fb, #26acbd);
+  text-shadow: 0 1px 1px grey;
+  box-shadow: 0 0.2em 0 #068494, 0 0.2em 0.2em grey;
+}
+button:active {
+  box-shadow: 0 0.1em 0 #068494, 0 0.1em 0.1em grey;
+  transform: translate(0 0.05em);
+}

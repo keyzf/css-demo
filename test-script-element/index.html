@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>测试多个script 标签中的 变量是否可以访问</title>
+  </head>
+  <body>
+    <script>
+      // var 声明的变量是挂载在全局对象 window 上的
+      var obj = { value: "first script variable" };
+      // es6 声明的变量是不挂载在全局对象 window 上的
+      let newStr = "es6 statement variable"
+    </script>
+    <script>
+      (function(context){
+        context.aStr = "second script variable"
+      })(window)
+
+
+      try {
+        console.log("log 2 -> obj2: ", obj2)
+      } catch (error) {
+        console.error("不能访问到 obj2")
+      }
+    </script>
+   
+    <script>
+
+      var obj2 = "this a variable"
+      console.log("log 1 -> obj: ", obj)
+      console.log("log 1 -> newStr: ", newStr)
+      console.log("log 3 -> window.aStr: ",window.aStr)
+
+
+      // 可以访问 之前 script 标签中 变量 和 函数 ，
+    </script>
+  </body>
+</html>

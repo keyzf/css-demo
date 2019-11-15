@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="./ol.css"
+      type="text/css"
+    />
+    <style>
+      .map {
+        height: 600px;
+        width: 100%;
+      }
+    </style>
+    <script src="./ol.js"></script>
+    <title>OpenLayers example</title>
+  </head>
+  <body>
+    <h2>My Map</h2>
+    <div id="map" class="map"></div>
+    <script type="text/javascript">
+      // var map = new ol.Map({
+      //   target: 'map',
+      //   layers: [
+      //     new ol.layer.Tile({
+      //       source: new ol.source.OSM()
+      //     })
+      //   ],
+      //   view: new ol.View({
+      //     center: ol.proj.fromLonLat([121.48, 31.22]),
+      //     zoom: 10
+      //   })
+      // });
+
+      /**
+       * descrption: 使用openLayer处理
+       * authohr: wangji
+       * date: 2017-07-24 20:00
+       */
+      var radius = 0;
+      var MapConfig = function(opt) {
+        ol.Object.call(this);
+        this.setting = opt.setting || false;
+        this.mapDiv = opt.mapDiv || undefined;
+        this.imagePath = opt.imagePath || undefined;
+        this.extent = [-0.5, -1156.5, 1636.5, 0.5];
+        this.zoom = opt.zoom || 2;
+        this.maxZoom = opt.maxZoom || 17;
+        this.situation = opt.situation || 0;
+      };
+      ol.inherits(MapConfig, ol.Object);
+      MapConfig.prototype.initMap = function() {
+        if (!this.imagePath) {
+          return;
+        }
+        if (!this.mapDiv) {
+          return;
+        }
+        var __that = this;
+        this.projection = new ol.proj.Projection({
+          code: "xkcd-image",
+          units: "pixels",
+          extent: __that.extent
+        });
+        this.map = new ol.Map({
+          target: this.mapDiv,
+          render: "canvas",
+          view: new ol.View({
+            projection: __that.projection,
+            center: ol.extent.getCenter(__that.extent),
+            zoom: this.zoom,
+            maxZoom: this.maxZoom
+          })
+        });
+
+        var baseLayer = new ol.layer.Image({
+          //地图底图
+          source: new ol.source.ImageStatic({
+            url: __that.imagePath,
+            projection: __that.projection,
+            imageExtent: __that.extent
+          })
+        });
+        this.baseLayer = baseLayer;
+
+        this.map.addLayer(baseLayer);
+        if (__that.situation == 0) {
+          //某种情况可以拖动
+          __that.map.addInteraction(new app.Drag());
+        }
+        function createStyle(src, orgname) {
+          return new ol.style.Style({
+            image: new ol.style.Icon({
+              anchor: [0.5, 0.5],
+              crossOrigin: "anonymous",
+              anchorOrigin: "bottom-right",
+              src: src
+            }),
+            text: new ol.style.Text({
+              font: "14px serif",
+              text: orgname,
+              offsetX: 0,
+              offsetY: 30,
+              stroke: new ol.style.Stroke({ color: "black", width: 1 })
+            }),
+            stroke: new ol.style.Stroke({
+              width: 3,
+              color: [255, 0, 0, 1]
+            }),
+            fill: new ol.style.Fill({
+              color: [0, 0, 255, 0.6]
+            })
+          });
+        }
+
+        this.ruuningJobFeature = []; //存储某个点可以让其闪烁
+
+        var areaLayer = new ol.layer.Vector({
+          source: new ol.source.Vector(),
+          style: function(feathure) {
+            var orgName = feathure.get("orgName");
+            if (__that.situation == 1) {
+              var globalStatus = feathure.get("globalStatus");
+              if (globalStatus == 1) {
+                __that.ruuningJobFeature.push(feathure);
+                return createStyle("test.jpg", orgName); //某种状态
+              } else if (globalStatus == 2) {
+                return createStyle("test1.jpg", orgName);
+              } else {
+                return createStyle("test2.jpg", orgName);
+              }
+            }
+          },
+          zIndex: 1
+        }); //区域layer
+
+        this.areaLayer = areaLayer;
+        this.map.addLayer(areaLayer);
+        this.map.on("click", __that.mapListener, __that);
+        /**
+         *处理闪烁的流程
+         * 1.将需要处理的要素保存起来到一个数组中
+         * 2.地图渲染时都会触发postcompose事件进行监听
+         * 3.将保存的要素切换其Style
+         * 4.可以根据自增数据控制其切换的速度
+         */
+        this.map.on("postcompose", function() {
+          if (__that.ruuningJobFeature.length > 0) {
+            radius++;
+            radius = radius % 100;
+            var style;
+            for (var i = 0; i < __that.ruuningJobFeature.length; i++) {
+              var orgName = __that.ruuningJobFeature[i].get("orgName");
+              if (radius < 60) {
+                src = "test.jpg";
+                style = createStyle(src, orgName);
+              } else {
+                style = new ol.style.Style({
+                  text: new ol.style.Text({
+                    font: "14px serif",
+                    text: orgName,
+                    offsetX: 0,
+                    offsetY: 30,
+                    stroke: new ol.style.Stroke({ color: "black", width: 1 })
+                  }),
+                  stroke: new ol.style.Stroke({
+                    width: 3,
+                    color: [255, 0, 0, 1]
+                  }),
+                  fill: new ol.style.Fill({
+                    color: [0, 0, 255, 0.6]
+                  })
+                });
+              }
+              __that.ruuningJobFeature[i].setStyle(style);
+            }
+          }
+        });
+      };
+      MapConfig.prototype.mapListener = function(evt) {
+        var __that = this;
+        var pixel = evt.pixel;
+        var coordinate = __that.map.getCoordinateFromPixel(pixel);
+        var feature = __that.map.forEachFeatureAtPixel(pixel, function(
+          feature
+        ) {
+          //获取到点击的feathure
+          return feature;
+        });
+        if (feature && feature instanceof ol.Feature) {
+          __that.dispatchEvent(new MapClick("map-click", feature));
+        }
+      };
+
+      MapConfig.prototype.addFeature = function(feature) {
+        if (feature && feature instanceof ol.Feature) {
+          this.areaLayer.getSource().addFeature(feature);
+        }
+      };
+      MapConfig.prototype.removeFeature = function(feature) {
+        if (feature && feature instanceof ol.Feature) {
+          this.areaLayer.getSource().removeFeature(feature);
+        }
+      };
+
+      MapConfig.prototype.getPointFeatureFromXY = function(param) {
+        // debugger
+        var point = new ol.geom.Point([param.xCoord, param.yCoord]);
+        var feature = new ol.Feature({
+          geometry: point,
+          orgName: param.orgName, //自己设置的值
+          globalStatus: param.globalStatus
+        });
+        this.areaLayer.getSource().addFeature(feature);
+      };
+
+      /**
+       * @desction: 创建线
+       * @author: wangji
+       * @date: 2017/7/25
+       * @param:
+       * @return:
+       */
+      MapConfig.prototype.generateLine = function(param) {
+        if (param == null || param.length <= 0) {
+          return;
+        }
+        var lineString = new ol.geom.LineString();
+        for (var i = 0; i < param.length; i++) {
+          var point = [param[i].x, param[i].y];
+          lineString.appendCoordinate(point);
+        }
+        var feature = new ol.Feature({
+          geometry: lineString
+        });
+        var lineLayer = new ol.layer.Vector({
+          source: new ol.source.Vector(),
+          style: function(feature) {
+            var geometry = feature.getGeometry();
+            var styles = [
+              // linestring
+              new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                  color: "#49B4FF",
+                  width: 2
+                })
+              })
+            ];
+            return styles;
+          }
+        });
+        lineLayer.getSource().addFeature(feature);
+        this.map.addLayer(lineLayer);
+      };
+      //改变底层的图片
+      MapConfig.prototype.changeBaseLayerImage = function(ImpagePath) {
+        if (ImpagePath == undefined || ImpagePath == "") {
+          return;
+        }
+        var __that = this;
+        var baseLayer = new ol.layer.Image({
+          //地图底图
+          source: new ol.source.ImageStatic({
+            url: path + ImpagePath,
+            projection: __that.projection,
+            imageExtent: __that.extent
+          })
+        });
+        __that.map.removeLayer(__that.baseLayer);
+        __that.baseLayer = baseLayer;
+        __that.map.addLayer(baseLayer);
+      };
+
+      var MapClick = function(type, param) {
+        ol.events.Event.call(this, type);
+        this.param = param;
+      };
+      ol.inherits(MapClick, ol.events.Event);
+
+      var app = {}; //拖拽事件的处理，官方网站
+      app.Drag = function() {
+        ol.interaction.Pointer.call(this, {
+          handleDownEvent: app.Drag.prototype.handleDownEvent,
+          handleDragEvent: app.Drag.prototype.handleDragEvent,
+          handleMoveEvent: app.Drag.prototype.handleMoveEvent,
+          handleUpEvent: app.Drag.prototype.handleUpEvent
+        });
+        //坐标
+        this.coordinate_ = null;
+        //鼠标
+        this.cursor_ = "pointer";
+        //要素
+        this.feature_ = null;
+        this.previousCursor_ = undefined;
+      };
+      ol.inherits(app.Drag, ol.interaction.Pointer);
+
+      /**
+       * 当鼠标向下的时候，判断当前是不是要素，是的话返回true开始拖拽
+       */
+      app.Drag.prototype.handleDownEvent = function(evt) {
+        var map = evt.map;
+
+        var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
+          return feature;
+        });
+        //记录当前的点和当前的要素的值
+        if (feature && feature instanceof ol.Feature) {
+          this.coordinate_ = evt.coordinate;
+          this.feature_ = feature;
+        }
+        return !!feature;
+      };
+
+      /**
+       * 拖动时候的事件，不用管它
+       */
+      app.Drag.prototype.handleDragEvent = function(evt) {
+        var deltaX = evt.coordinate[0] - this.coordinate_[0];
+        var deltaY = evt.coordinate[1] - this.coordinate_[1];
+        var geometry = this.feature_.getGeometry();
+        geometry.translate(deltaX, deltaY);
+        this.coordinate_[0] = evt.coordinate[0];
+        this.coordinate_[1] = evt.coordinate[1];
+      };
+      /**
+       * 拖动过程中的事件，不用管它
+       */
+      app.Drag.prototype.handleMoveEvent = function(evt) {
+        if (this.cursor_) {
+          var map = evt.map;
+          var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
+            return feature;
+          });
+          var element = evt.map.getTargetElement();
+          if (feature) {
+            if (element.style.cursor != this.cursor_) {
+              this.previousCursor_ = element.style.cursor;
+              element.style.cursor = this.cursor_;
+            }
+          } else if (this.previousCursor_ !== undefined) {
+            element.style.cursor = this.previousCursor_;
+            this.previousCursor_ = undefined;
+          }
+        }
+      };
+
+      app.Drag.prototype.handleUpEvent = function() {
+        //拖动结束了，我们在这里做一些自己的处理
+        var objectId = this.feature_.get("orgId");
+        var coordinate = this.coordinate_;
+        //处理事件或者ajax请求等等
+
+        this.coordinate_ = null;
+        this.feature_ = null;
+        return false;
+      };
+    </script>
+  </body>
+</html>

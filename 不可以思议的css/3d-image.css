@@ -1,0 +1,117 @@
+body {
+  overflow: hidden;
+}
+.scene {
+  perspective: 100vw;
+}
+.box {
+  transform: rotateX(45deg);
+  transform-style: preserve-3d;
+}
+.ground {
+  background-color: #eee;
+  background-image: linear-gradient(
+      45deg,
+      black 25%,
+      transparent 25%,
+      transparent 75%,
+      black 75%,
+      black
+    ),
+    linear-gradient(
+      45deg,
+      black 25%,
+      transparent 25%,
+      transparent 75%,
+      black 75%,
+      black
+    );
+  background-size: 10vw 10vw;
+  background-position: 0 0, 5vw 5vw;
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+}
+.poker {
+  width: 20vw;
+  height: 30vw;
+  border: 1px solid gray;
+  color: red;
+  background: white;
+  font-size: 20vw;
+  border-radius: 2vw;
+  transform-style: preserve-3d;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+.poker:nth-child(1) {
+  transform: translate(-50%, -50%) rotateX(-90deg) translateY(-11vw)
+    rotateY(90deg) rotateX(-25deg) translateZ(-7vw);
+}
+.poker:nth-child(2) {
+  transform: translate(-50%, -50%) rotateX(-90deg) translateY(-11vw)
+    rotateY(-90deg) rotateX(-25deg) translateZ(-7vw);
+}
+.poker:before {
+  border-radius: 2vw;
+  content: "♥";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  display: block;
+  display: grid;
+  place-content: center;
+}
+.poker:after {
+  border-radius: 2vw;
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background-image: radial-gradient(
+      closest-side,
+      transparent 0%,
+      transparent 75%,
+      #b6cc66 76%,
+      #b6cc66 85%,
+      #edffdb 86%,
+      #edffdb 94%,
+      #ffffff 95%,
+      #ffffff 103%,
+      #d9e6a7 104%,
+      #d9e6a7 112%,
+      #798b3c 113%,
+      #798b3c 121%,
+      #ffffff 122%,
+      #ffffff 130%,
+      #e0ead7 131%,
+      #e0ead7 140%
+    ),
+    radial-gradient(
+      closest-side,
+      transparent 0%,
+      transparent 75%,
+      #b6cc66 76%,
+      #b6cc66 85%,
+      #edffdb 86%,
+      #edffdb 94%,
+      #ffffff 95%,
+      #ffffff 103%,
+      #d9e6a7 104%,
+      #d9e6a7 112%,
+      #798b3c 113%,
+      #798b3c 121%,
+      #ffffff 122%,
+      #ffffff 130%,
+      #e0ead7 131%,
+      #e0ead7 140%
+    );
+  background-size: 4vw 4vw;
+  background-color: #c8d3a7;
+  background-position: 0 0, 2vw 2vw;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}

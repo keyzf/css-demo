@@ -1,0 +1,55 @@
+body,html{
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.dialog-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 0.3s ease-out 0.1s;
+
+  visibility: hidden;
+  opacity: 0;
+  .dialog-mask {
+    width: 100%;
+    height: 100%;
+    background: rgba(125, 125, 125, 0.2);
+    z-index: 1;
+    position: absolute;
+  }
+  .dialog-body {
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 2px #aaa;
+    border-radius: 8px;
+    width: 0;
+    height: 0;
+    transition: all 0.4s ease-out;
+
+    // transition: width 0.2s ease-out, height 0.2s ease-out 0.2s; // 拉幕效果
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+
+    z-index: 1000;
+  }
+}
+
+.visiable{
+  visibility: visible;
+  opacity: 1;
+}
+
+.body-visiable{
+  width: 600px !important;
+  height: 400px !important;
+
+  // transition: height 0.2s ease-out , width 0.2s ease-out 0.2s !important; // 拉幕效果
+}

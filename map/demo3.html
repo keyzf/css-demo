@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./ol.css" type="text/css" />
+    <style>
+      .map {
+        height: 600px;
+        width: 100%;
+      }
+    </style>
+    <script src="./ol.js"></script>
+    <title>OpenLayers example</title>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var layer1 = new ol.layer.Tile({
+        visible: false, //非必填，默认true
+        preload: Infinity, //非必填、Infinity表示正无穷大
+        source: new ol.source.BingMaps({
+          key:
+            "AkjzA7OhS4MIBjutL21bkAop7dc41HSE0CNTR5c6HJy8JKc7U9U9RveWJrylD3XJ", //必填、key要自己去申请哦
+          imagerySet: "Road" //必填，可选值：Road、Aerial、AerialWithLabels、collinsBart、ordnanceSurvey
+        })
+      });
+      var layer2 = new ol.layer.Tile({
+        source: new ol.source.BingMaps({
+          key:
+            "AkjzA7OhS4MIBjutL21bkAop7dc41HSE0CNTR5c6HJy8JKc7U9U9RveWJrylD3XJ",
+          imagerySet: "AerialWithLabels"
+        })
+      });
+      new ol.Map({
+        layers: [layer1, layer2],
+        target: "map",
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        })
+      });
+
+      //3秒后隐藏 layer2 显示 layer1
+      setTimeout(function() {
+        layer1.setVisible(true);
+        layer2.setVisible(false);
+      }, 3000);
+    </script>
+  </body>
+</html>
