@@ -1,0 +1,63 @@
+.wave{
+  position:absolute;
+  top:calc((100% - 30px)/2);
+  left:calc((100% - 30px)/2);
+  width:30px;
+  height:30px;
+  border-radius:300px;
+
+  background:url('./demo.jpg');
+  background-attachment:fixed;
+  background-position:center center;
+}
+.wave0{
+  /* background:#f00; */
+  background-size:auto 106%;
+  z-index:2;
+  background-size:auto 106%;
+  animation:w 1s forwards;
+}
+.wave1{
+  /* background:#d00; */
+  background-size:auto 102%;
+  z-index:3;
+  animation:w 1s .2s forwards;
+}
+.wave2{
+  /* background:#b00; */
+  background-size:auto 104%;
+  z-index:4;
+  animation:w 1s .4s forwards;
+}
+.wave3{
+  /* background:#900; */
+  background-size:auto 101%;
+  z-index:5;
+  animation:w 1s .5s forwards;
+}
+.wave4{
+  /* background:#700; */
+  background-size:auto 102%;
+  z-index:6;
+  animation:w 1s .8s forwards;
+}
+.wave5{
+  /* background:#500; */
+  background-size:auto 100%;
+  z-index:7;
+  animation:w 1s 1s forwards;
+}
+@keyframes w{
+  0%{
+    top:calc((100% - 30px)/2);
+    left:calc((100% - 30px)/2);
+    width:30px;
+    height:30px;
+  }
+  100%{
+    top:calc((100% - 300px)/2);
+    left:calc((100% - 300px)/2);
+    width:300px;
+    height:300px;
+  }
+}

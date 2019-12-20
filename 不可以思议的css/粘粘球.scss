@@ -1,0 +1,76 @@
+.bruce {
+  margin: 100px;
+	filter: contrast(10);
+}
+.sticky-ball {
+	position: relative;
+	width: 320px;
+	height: 80px;
+	filter: contrast(10);
+}
+div[class*=ball-] {
+  padding: 40px;
+	position: absolute;
+	top: 0;
+	border-radius: 100%;
+	width: 80px;
+	height: 80px;
+	background-color: #f66;
+	filter: blur(3px);
+}
+.ball-1 {
+	left: 0;
+	animation: move-1 6s 0.1s infinite ;
+}
+.ball-2 {
+	left: 240px;
+	animation: move-2 6s infinite;
+}
+@keyframes move-1 {
+	0%,
+	20%,
+	100% {
+		width: 80px;
+		height: 80px;
+	}
+	50% {
+		left: 110px;
+		top: -15px;
+		width: 110px;
+		height: 110px;
+	}
+	85% {
+		left: 75px;
+		width: 90px;
+		height: 70px;
+	}
+	90% {
+		top: -2px;
+		width: 75px;
+		height: 85px;
+	}
+}
+@keyframes move-2 {
+	0%,
+	20%,
+	100% {
+		width: 80px;
+		height: 80px;
+	}
+	50% {
+		left: 110px;
+		top: -15px;
+		width: 110px;
+		height: 110px;
+	}
+	85% {
+		left: 165px;
+		width: 90px;
+		height: 70px;
+	}
+	90% {
+		top: -2px;
+		width: 75px;
+		height: 85px;
+	}
+}

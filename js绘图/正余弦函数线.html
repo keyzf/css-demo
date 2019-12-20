@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>正余弦函数线</title>
+    <style>
+      .container {
+        width: 600px;
+        height: 600px;
+        border-bottom: 1px solid #000;
+        border-left: 1px solid #000;
+        position: relative;
+        margin-left: 500px;
+      }
+      .dot {
+        width: 1px;
+        height: 1px;
+        background: #000;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="dot"></div>
+    </div>
+    <script>
+      // 4*sin(sqrt(x^2+y^2))/sqrt(x^2+y^2)    x  is from -10 to 10  y is from -10 to 10   z is from -5 to 11
+
+      // 100-3/(sqrt(x^2+y^2))+2/sin(sqrt(x^2+y^2))+sqrt(200-(x^2+y^2)+10*sin(x)+10sin(y))/1000, x is from -15 to 15, y is from -15 to 15, z is from 90 to 101
+
+      // sqrt(x*x+y*y)+4*cos(sqrt(x*x+y*y))+6 from -20 to 20
+      
+      var container = document.getElementsByClassName('container')[0]
+      
+      // for (let i = -360; i < 360; i += 0.1) {
+      //   let a = document.createElement("div");
+      //   a.classList.add('dot')
+      //   // let y = Math.tan(i*Math.PI/180); //正切线
+      //   let y = Math.sin(i*Math.PI/180); //正弦线
+      //   a.style.left = i + "px";
+      //   a.style.bottom = y*100 + "px";
+      //   console.log('==',i,y)
+      //   container.appendChild(a)
+      // }
+
+      for (let z = -5; z < 11; z+=0.1) {
+        for (let x = -10; x < 10; x+=1) {
+          let a = document.createElement("div");
+          z = 4*sin(sqrt(x^2+y^2))/sqrt(x^2+y^2)
+        }
+        for (let y = -10; y < 10; y+=0.1) {
+          let a = document.createElement("div");
+          
+        }
+        
+      }
+
+      function sin(value) {
+        return Math.sin(value*Math.PI/180);
+      }
+      function sqrt(value) {
+        return Math.sqrt(value)
+      }
+      function pow(value,index){
+        return Math.pow(value,index)
+      }
+      
+     
+    </script>
+  </body>
+</html>

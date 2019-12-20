@@ -1,0 +1,42 @@
+body,html{
+  margin: 0;
+  padding: 0;
+}
+.bruce {
+	background-color: #000;
+}
+.fault-text {
+	position: relative;
+	font-weight: bold;
+	font-size: 800px;
+  color: #fff;
+  width: 100%;
+	&::before,
+	&::after {
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		background-color: #000;
+		clip: rect(0, 100px, 0, 0);
+		color: #fff;
+		content: attr(data-text);
+		animation: shake 5s linear infinite alternate-reverse;
+	}
+	&::before {
+		left: -3px;
+		text-shadow: 2px 0 rgb(114, 144, 163);
+	}
+	&::after {
+		left: 3px;
+		text-shadow: -2px 0 rgb(221, 116, 116);
+		animation-duration: 2s;
+	}
+}
+@keyframes shake {
+	$steps: 80;
+	@for $i from 0 through $steps {
+		#{percentage($i * (1 / $steps))} {
+			clip: rect(random(800) + px, 9999px, random(800) + px, 0);
+		}
+	}
+}

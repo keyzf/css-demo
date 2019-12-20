@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>利用css 实现水波扩散</title>
+    <link rel="stylesheet" href="./水波扩散.css" />
+  </head>
+  <body>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <button onclick="change()">change</button>
+    <script>
+    var waveList = document.querySelectorAll('.wave');
+    console.log('waveList',waveList);
+    [...waveList].reverse().forEach(function(item,index){
+      item.classList.add(`wave${index}`)
+    })
+    function change(){
+      console.log('waveList',waveList);
+      // [...waveList].reverse().forEach(function(item,index){
+      //   item.classList.add(`wave${index}`)
+      // })
+      // setTimeout(() => {
+      //   [...waveList].reverse().forEach(function(item,index){
+      //     item.classList.remove(`wave${index}`)
+      //   })
+      // }, 2100);
+    }
+    
+    </script>
+  </body>
+</html>

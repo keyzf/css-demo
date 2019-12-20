@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>css 实现display:none ---> display:block 的转场动画</title>
+    <style>
+      .container {
+        display: block;
+        background: #000;
+        width: 300px;
+        height: 400px;
+        transition: all 0.5s;
+        color: #fff;
+      }
+
+      .container-none{
+        opacity: 0;
+        height: 0;
+        /* display: none; */
+      }
+
+      button{
+        margin-top: 10px;
+      }
+
+      @keyframes hideIndex{
+        
+        from { opacity: 0; }
+        to{ opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      111111111
+      <!-- <div>111111111</div> -->
+    </div>
+    <button onclick="change()">change</button>
+    <script>
+      var container = document.getElementsByClassName("container")[0];
+      function change() {
+        console.log("container", container);
+        container.classList.toggle('container-none')
+      }
+    </script>
+  </body>
+</html>
