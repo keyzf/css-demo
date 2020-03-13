@@ -41,9 +41,9 @@ body{
     transform-style: preserve-3d;
     /*-webkit-perspective: 1000px;*/
     /*动画样式*/
-    -webkit-animation: changeMix 6s linear infinite alternate;
-    -moz--animation: changeMix 6s linear infinite alternate;
-    animation: changeMix 6s linear infinite alternate;
+    -webkit-animation: changeMix 10s linear infinite alternate;
+    -moz--animation: changeMix 10s linear infinite alternate;
+    animation: changeMix 10s linear infinite alternate;
 }
 
 
