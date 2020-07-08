@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>彩虹色背景实现</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <style>
+      @font-face {
+        font-family: 'font1';
+        src: url('./font/STCAIYUN.ttf');
+      }
+      @font-face {
+        font-family: 'font2';
+        src: url('./font/STHUPO.ttf');
+      }
+      @font-face {
+        font-family: 'font3';
+        src: url('./font/STXINGKA.ttf');
+      }
+      .content{
+        border: 1px solid #00000088;
+        padding: 10px;
+        margin: 5px auto 0;
+        width: 90%;
+      }
+      .view {
+        border: 1px dashed #00000066;
+        padding: 15px;
+        /* width: 100%; */
+        /* margin-top: 150px; */
+        /* position: absolute; */
+        /* top: 0; */
+        /* z-index: 10000; */
+        background-image: linear-gradient(
+          90deg,
+          #ff0000,
+          #ff00dd,
+          #0400ff,
+          #00eeff,
+          #00ff4c,
+          #c8ff00,
+          #ffd500,
+          #ff5900,
+          #ff0000
+        );
+        /* background: linear-gradient(90deg,#ff0000,#00ff00,#0000ff,#ff0000); */
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        /* font-weight: bolder; */
+        font-size: 110px;
+        /* font-family: "hw"; */
+        text-align: center;
+        font-variation-settings: "wght" 700;
+      }
+      .text-1{
+        font-family: "font1";
+      }
+      .text-2{
+        font-family: "font2";
+      }
+      .text-3{
+        font-family: "font3";
+      }
+      .view:not(.text-1){
+        border-top: none;
+      }
+      .text-4{
+        /* transition: all 2s ease-in; */
+        animation: word-change 0.5s ease-in infinite alternate both;
+      }
+      .word-1{
+        animation-delay: 0s;
+      }
+      .word-2{
+        animation-delay: 0.5s;
+      }
+      .word-3{
+        animation-delay: 1s;
+      }
+      .word-4{
+        animation-delay: 1.5s;
+      }
+      .word-5{
+        animation-delay: 2s;
+      }
+      .word-6{
+        animation-delay: 2.5s;
+      }
+      .word-7{
+        animation-delay: 3s;
+      }
+      .word-8{
+        animation-delay: 3.5s;
+      }
+      .word-9{
+        animation-delay: 4s;
+      }
+      .word-10{
+        animation-delay: 4.5s;
+      }
+      @keyframes word-change{
+        0%{
+          font-family: "font1";
+        }
+        100%{
+          font-family: "font2";
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="view text-1">
+        这是彩虹色背景的文字
+      </div>
+      <div class="view  text-2">
+        这是彩虹色背景的文字
+      </div>
+      <div class="view  text-3">
+        这是彩虹色背景的文字
+      </div>
+      <div class="view">
+        <span class="text-3">这</span>
+        <span class="text-3">是</span>
+        <span class="word-1 text-4">彩</span>
+        <span class="word-2 text-4">虹</span>
+        <span class="word-3 text-4">色</span>
+        <span class="text-3">背</span>
+        <span class="text-3">景</span>
+        <span class="text-3">的</span>
+        <span class="text-3">文</span>
+        <span class="text-3">字</span>
+      </div>
+      <div class="view">
+        <span class="word-1 text-4">这</span>
+        <span class="word-2 text-4">是</span>
+        <span class="word-3 text-4">彩</span>
+        <span class="word-4 text-4">虹</span>
+        <span class="word-5 text-4">色</span>
+        <span class="word-6 text-4">背</span>
+        <span class="word-7 text-4">景</span>
+        <span class="word-8 text-4">的</span>
+        <span class="word-9 text-4">文</span>
+        <span class="word-10 text-4">字</span>
+      </div>
+    </div>
+
+    
+    <!-- <input type="color" name="" id="" value="#ff0000" /> -->
+  </body>
+</html>

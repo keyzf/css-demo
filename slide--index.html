@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slider</title>
+    <style>
+        .display {
+            width: 600px;
+            height: 200px;
+            background-color: rgb(0, 0, 0)
+        }
+        
+        .range {
+            width: 500px;
+            height: 50px;
+        }
+        
+        .rangeborder {
+            width: 255px;
+            height: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .rangecolor {
+            width: 0px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: deepskyblue;
+            margin-top: -11px;
+        }
+        
+        .rangedot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, white, black);
+            margin-top: -16px;
+            position: absolute;
+            left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <display></display>
+        <ranges></ranges>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var vm = new Vue({
+            data: {
+                d1: 0,
+                d2: 0,
+                d3: 0
+            },
+
+        })
+        new Vue({
+            el: "#main",
+            components: {
+                "display": {
+                    template: `
+                    <div class="display"></div>
+                    `,
+                    created: function() {
+
+                        vm.$on("colordatar", function(d) {
+                            this.d1 = d
+
+                            var dp = document.getElementsByClassName("display")[0]
+                            dp.style.backgroundColor = "rgb(" + this.d1 + "," + this.d2 + "," + this.d3 + ")"
+                        }).$on("colordatas", function(d) {
+                            this.d2 = d
+
+                            console.log(d)
+                            var dp = document.getElementsByClassName("display")[0]
+                            dp.style.backgroundColor = "rgb(" + this.d1 + "," + this.d2 + "," + this.d3 + ")"
+                        }).$on("colordatab", function(d) {
+                            this.d3 = d
+
+                            console.log(d)
+                            var dp = document.getElementsByClassName("display")[0]
+                            dp.style.backgroundColor = "rgb(" + this.d1 + "," + this.d2 + "," + this.d3 + ")"
+                        })
+                    }
+                },
+                "ranges": {
+                    template: `
+                    <div>
+                    <p>R:
+                    <ranger></ranger>
+                    S:
+                    <ranges></ranges>
+                    B:
+                    <rangeb></rangeb>
+                    </p>
+                    </div>
+                    `,
+                    components: {
+                        ranger: {
+                            template: `
+                            <div class="range">
+                                <div class="rangeborder"></div>
+                                <div class="rangecolor"></div>
+                                <div class="rangedot" @mousedown="mousedown"></div>
+                            </div>
+                            `,
+                            methods: {
+                                mousedown: function(e) {
+                                    var dx = e.offsetX;
+                                    // var dy = e.offsetY;
+                                    console.log(dx);
+                                    document.onmousemove = function(ev) {
+                                        var div1 = document.getElementsByClassName("rangecolor")[0]
+                                        var div = document.getElementsByClassName("rangedot")[0]
+                                        var temp = ev.clientX - dx;
+                                        if (temp > 255) {
+                                            div1.style.width = "255px";
+                                            div.style.left = "255px";
+                                        } else if (temp < 0) {
+                                            div1.style.width = "0px";
+                                            div.style.left = "0px";
+                                        } else {
+                                            div1.style.width = ev.clientX - dx + "px";
+                                            div.style.left = ev.clientX - dx + "px";
+                                        }
+                                        if (0 <= temp && temp <= 255) {
+                                            vm.$emit("colordatar", temp)
+                                        }
+
+                                    }
+                                    window.onmouseup = function() {
+                                        document.onmousemove = null;
+                                    }
+                                }
+                            }
+                        },
+                        ranges: {
+                            template: `
+                            <div class="range">
+                                <div class="rangeborder"></div>
+                                <div class="rangecolor"></div>
+                                <div class="rangedot" @mousedown="mousedown"></div>
+                            </div>
+                            `,
+                            methods: {
+                                mousedown: function(e) {
+                                    var dx = e.offsetX;
+                                    // var dy = e.offsetY;
+                                    console.log(dx);
+                                    document.onmousemove = function(ev) {
+                                        var div1 = document.getElementsByClassName("rangecolor")[1]
+                                        var div = document.getElementsByClassName("rangedot")[1]
+                                        var temp = ev.clientX - dx;
+                                        if (temp > 255) {
+                                            div1.style.width = "255px";
+                                            div.style.left = "255px";
+                                        } else if (temp < 0) {
+                                            div1.style.width = "0px";
+                                            div.style.left = "0px";
+                                        } else {
+                                            div1.style.width = ev.clientX - dx + "px";
+                                            div.style.left = ev.clientX - dx + "px";
+                                        }
+                                        if (0 <= temp && temp <= 255) {
+                                            vm.$emit("colordatas", temp)
+                                        }
+
+                                    }
+                                    window.onmouseup = function() {
+                                        document.onmousemove = null;
+                                    }
+                                }
+                            }
+                        },
+                        rangeb: {
+                            template: `
+                            <div class="range">
+                                <div class="rangeborder"></div>
+                                <div class="rangecolor"></div>
+                                <div class="rangedot" @mousedown="mousedown"></div>
+                            </div>
+                            `,
+                            methods: {
+                                mousedown: function(e) {
+                                    var dx = e.offsetX;
+                                    // var dy = e.offsetY;
+                                    console.log(dx);
+                                    document.onmousemove = function(ev) {
+                                        var div1 = document.getElementsByClassName("rangecolor")[2]
+                                        var div = document.getElementsByClassName("rangedot")[2]
+                                        var temp = ev.clientX - dx;
+                                        if (temp > 255) {
+                                            div1.style.width = "255px";
+                                            div.style.left = "255px";
+                                        } else if (temp < 0) {
+                                            div1.style.width = "0px";
+                                            div.style.left = "0px";
+                                        } else {
+                                            div1.style.width = ev.clientX - dx + "px";
+                                            div.style.left = ev.clientX - dx + "px";
+                                        }
+                                        if (0 <= temp && temp <= 255) {
+                                            vm.$emit("colordatab", temp)
+                                        }
+
+                                    }
+                                    window.onmouseup = function() {
+                                        document.onmousemove = null;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
