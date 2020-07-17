@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>promise-test</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <style>
+    .view{
+      width: 100%;
+      height: 688px;
+      background-color: #fff;
+      background-image: linear-gradient(90deg, transparent 0px, #abced4 0px, #abced4 25px, transparent 25px), linear-gradient(#eee .1em, transparent .1em);
+      background-size: 100% 18px;
+    }
+    pre{
+      background: transparent;
+      line-height: 18px;
+      font-size: 12px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="view">
+    <pre>
+      var test = new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          resolve('1')
+        })
+      }).then(data=>{
+        console.log('then==1',data)
+        return 'then 1'
+      }).then(data=>{
+        console.log('then==2',data)
+        return 'then 2'
+      }).then(data=>{
+        console.log('then==3',data);
+        throw new Error('then 3 catch error')
+        // return 'then 3'
+      }).then(data=>{
+        console.log('then==4',data)
+        return 'then 4'
+      },err=>{
+        console.log('then 4 err', err)
+        return 'then 4 err'
+      }).then(data=>{
+        console.log('then==5',data);
+        return 'then 5'  
+      }).then(data=>{
+        console.log('then==6',data);
+        throw new Error('then 6 catch error')
+        return 'then 6'  
+      }).then(data=>{
+        console.log('then==7',data);
+        return 'then 7'  
+      }).catch((err)=>{
+        console.log('err====',err)
+        return 'catch err 1'
+      }).finally(()=>{
+        test.then(data=>{
+          console.log('finally',data)
+        })
+      })
+    </pre>
+  </div>
+  
+  <div>
+    <img src="./Promise-test-1.png" alt="" srcset="" width="500">
+  </div>
+</body>
+</html>

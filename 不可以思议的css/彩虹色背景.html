@@ -4,19 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>彩虹色背景实现</title>
-    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="../css/normalize.css">
     <style>
       @font-face {
         font-family: 'font1';
-        src: url('./font/STCAIYUN.ttf');
+        src: url('../font/STCAIYUN.ttf');
       }
       @font-face {
         font-family: 'font2';
-        src: url('./font/STHUPO.ttf');
+        src: url('../font/STHUPO.ttf');
       }
       @font-face {
         font-family: 'font3';
-        src: url('./font/STXINGKA.ttf');
+        src: url('../font/STXINGKA.ttf');
+      }
+      @font-face {
+        font-family: 'font4';
+        src: url('../font/test_self.ttf');
       }
       .content{
         border: 1px solid #00000088;
@@ -62,6 +66,9 @@
       }
       .text-3{
         font-family: "font3";
+      }
+      .text-custom{
+        font-family: "font4";
       }
       .view:not(.text-1){
         border-top: none;
@@ -144,6 +151,10 @@
         <span class="word-8 text-4">的</span>
         <span class="word-9 text-4">文</span>
         <span class="word-10 text-4">字</span>
+      </div>
+
+      <div class="view text-custom">
+        AAAAAAAAAAAA BBBBBBBBBBBBBBBB
       </div>
     </div>
 
