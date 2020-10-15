@@ -1,0 +1,6 @@
+.colors {
+  width: 200px;
+  height: 200px;
+  background: conic-gradient(red, #ff4d00, #ff9900, #ffe600, #ccff00, #80ff00, #33ff00, #00ff1a, #00ff66, #00ffb3, cyan, #00b3ff, #0066ff, #001aff, #3300ff, #8000ff, #cc00ff, #ff00e6, #ff0099, #ff004d, red);
+  border-radius: 50%;
+}
