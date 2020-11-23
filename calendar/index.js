@@ -504,3 +504,8 @@ function removeChildren() {
     $(".calendar-content")[0].removeChild(childs.item(i));
   }
 }
+
+window.onload = function () {
+  nextMonth()
+  preMonth()
+}
