@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      display: flex;
+    }
+    .container div{
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+    .red {
+      color: red
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="190" height="180">
+      <polygon points="100,0 160,180 10,60 190,60 40,180" style="fill:white;stroke:red;stroke-width:1;"/>
+  </svg>
+   </svg>
+    <div class="red">★</div>
+    <div>★</div>
+    <div>★</div>
+    <div>★</div>
+    <div>★</div>
+  </div>
+
+
+  <div>
+    <!-- 
+      // A（0,1）
+      // B(cos18°,sin18°)
+      // C(cos54°,-sin54°)
+      // D(-cos54°,-sin54°)
+      // E(-cos18°,sin18°)
+      // 假设t为内部五边形外接圆半径，
+      // t=(1+tan^2(18°))/(3-tan^2(18°))，即0.3819660112501
+      // 则五个顶点所对应的坐标为(即内部五边形的五个顶点)：
+      // AA(0,-t)
+      // BB(-t*cos18°,-t*sin18°)
+      // CC(-t*cos54°,t*sin54°)
+      // DD(t*cos54°,t*sin54°)
+      // EE(t*cos18°,-t*sin18°)
+    
+      //sin18°   0.3090169943749474
+      //cos18°   0.9510565162951535
+      //-sin54°  -0.8090169943749475
+      //cos54°  0.5877852522924731
+      //a （0,1）（0.95,0.31）（0.59,-0.81）（-0.59,-0.81）（-0.95,0.31）
+      //aa （0,-0.38）（-0.36,-0.12）（-0.22,0.31）（0.22,0.31）（0.36,-0.12）
+      // x+1, y+1  ==>
+      //a+1 （1,2）（1.95,1.31）（1.59,0.19）（0.41,0.19）（0.05,1.31）
+      //aa+1 （1,0.62）（0.64,0.88）（0.78,1.31）（1.22,1.31）（1.36,0.88）
+     -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="300" >
+      <polygon points="100,200 122,131     195,131 136,88    159,19 100,62      41,19 64,88    5,131 78,131 " 
+          style="fill:white;stroke:red;stroke-width:5;fill-rule:nonzero;" />
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="300" >
+      <g  transform="translate(100,10)rotate(35)">
+       <polygon cursor='pointer' fill='white' stroke='red' points="100,200 122,131     195,131 136,88    159,19 100,62      41,19 64,88    5,131 78,131 " 
+           style="stroke-width:5;fill-rule:nonzero;" />
+     </g>
+     </svg>
+  </div>
+</body>
+</html>
